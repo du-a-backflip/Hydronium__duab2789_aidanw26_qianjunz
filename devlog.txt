@@ -2,3 +2,6 @@ aidanW -- 2024-11-25 21:02
 * Added repo structure (excluding optional JS folder and design document)
 * Uploaded team flag
 * Created README with basic structure
+
+aidanW -- 2024-11-26 10:15
+* Uploaded Design Document V0
