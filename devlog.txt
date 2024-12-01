@@ -5,3 +5,7 @@ aidanW -- 2024-11-25 21:02
 
 aidanW -- 2024-11-26 22:16
 * Uploaded Design Document V0
+
+aidanW -- 2024-01-12 14:41
+* Added heading to __init__.py
+* Updated README: template for each section
