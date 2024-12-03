@@ -6,6 +6,13 @@ aidanW -- 2024-11-25 21:02
 aidanW -- 2024-11-26 22:16
 * Uploaded Design Document V0
 
-aidanW -- 2024-01-12 14:41
+aidanW -- 2024-12-01 14:41
 * Added heading to __init__.py
 * Updated README: template for each section
+
+aidanW -- 2024-12-02 22:07
+* Updated Design Document to V1:
+    - Added user settings page
+    - Clarified and adjusted component map, database organization table, and site map chart
+    - Adjusted task breakdown for backend components
+
