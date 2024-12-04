@@ -16,3 +16,10 @@ aidanW -- 2024-12-02 22:07
     - Clarified and adjusted component map, database organization table, and site map chart
     - Adjusted task breakdown for backend components
 
+duaB -- 2024-12-03 11:07
+* Updated README for keys
+    - Added calendarific key
+
+aidanW -- 2024-12-03 21:25
+* Added keys for giphyapi, spoonacular, and searchapi
+* Updated readme to show key statuses and additional information
