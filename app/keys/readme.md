@@ -1,13 +1,54 @@
 # API KEYS
 
 ## Calendarific
-An API Key is required. 
 
-The API Key for Calendarific can be obtained by making an account using an email address. 500 requests can be made with this key per day.
+**API Key Status:** Uploaded and Active
 
-## Spoonacular
+**Obtain Method:** Creating an account on site with email address 
+
+**Limitations:** 500 requests per day, Free Tier (Limited historical/upcoming data + Updated quarterly)
+
+**Expiration:** Non-expiring
+
+**Owner:** Dua Baig
 
 
 ## GiphyAPI
 
+**API Key Status:** Uploaded and Active
+
+**Obtain Method:** Creating an account on site with email address 
+
+**Limitations:** 42 requests per hour, rate-limiting, free tier (limited support with high quality GIFS)
+
+**Expiration:** Non-expiring
+
+**Owner:** Aidan Wong
+
+
 ## SearchAPI
+
+**API Key Status:** Uploaded and Active
+
+**Obtain Method:** Creating an account on site with email address 
+
+**Limitations:** 100 requests per account (total, nonrenewing)
+
+**Expiration:** Non-expiring
+
+**Owner:** Qianjun Zhou
+
+
+## Spoonacular
+
+**API Key Status:** Uploaded and Active
+
+**Obtain Method:** Creating an account on site with email address 
+
+**Limitations:**  150 requests per day, 1 request per second, 
+
+**Expiration:** Non-expiring
+
+**Owner:** Aidan Wong
+
+
