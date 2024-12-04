@@ -23,3 +23,6 @@ duaB -- 2024-12-03 11:07
 aidanW -- 2024-12-03 21:25
 * Added keys for giphyapi, spoonacular, and searchapi
 * Updated readme to show key statuses and additional information
+
+aidanW -- 2024-12-03 10:40
+* Added customModules folder with base code for interacting with database and API
