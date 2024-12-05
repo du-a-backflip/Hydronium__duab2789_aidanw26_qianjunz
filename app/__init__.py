@@ -14,12 +14,17 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
 @app.route('/')
-def home():
-    return "Welcome to the home page"
+def dashboard():
+    return render_template("dashboard.html")
 
-"""
 @app.route('/login')
+def login():
+    return render_template("login.html")
+
 @app.route('/register')
+def register():
+    return render_template("register.html")
+
 @app.route('/view')
 @app.route('/search')
 @app.route('/create')
@@ -27,7 +32,8 @@ def home():
 @app.route('/calender')
 @app.route('/hrecipes')
 @app.route('/settings')
-"""
+@app.route('/logout')
+
 
 if __name__ == "__main__":
     app.debug = True
