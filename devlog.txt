@@ -33,5 +33,6 @@ duaB -- 2024-12-04 10:40
 qianjunZ -- 2024-12-04 10:40
 * Added routes to the __init__.py
 
-aidanW -- 2024-12-05 10:25
+aidanW -- 2024-12-05 10:33
 * Added requirements to requirements.txt
+* Added working Flask app
