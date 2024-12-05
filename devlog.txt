@@ -26,3 +26,6 @@ aidanW -- 2024-12-03 21:25
 
 aidanW -- 2024-12-03 10:40
 * Added customModules folder with base code for interacting with database and API
+
+duaB -- 2024-12-03 10:40
+* Added html files as per design doc
