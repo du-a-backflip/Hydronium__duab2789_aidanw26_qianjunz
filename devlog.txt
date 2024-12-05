@@ -36,3 +36,6 @@ qianjunZ -- 2024-12-04 10:40
 aidanW -- 2024-12-05 10:33
 * Added requirements to requirements.txt
 * Added working Flask app
+
+qianjunZ -- 2024-12-05 11:00
+* Finished basic template for routing
