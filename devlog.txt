@@ -49,5 +49,11 @@ aidanW -- 2024-12-05 20:40
     - Fixed use of redirect in login and register page for working Flask app deliverable
 * Updated calendar route for correct spelling in __init__.py
 
+duaB -- 2024-12-06 10:15
+* Added basic navbar for site and urls to get to different pages
+
+duab -- 2024-12-06 11:00
+* Adjusted routing for login and register forms, added second password for confirmation on register, adjusted what non-logged in users can see on navbar.
+
 aidanW -- 2024-12-06 11:00
 * Created key retrieving function for APIs
