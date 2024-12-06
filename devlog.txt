@@ -42,3 +42,9 @@ qianjunZ -- 2024-12-05 11:00
 
 duaB -- 2024-12-05 11:00
 * Added basics for login and register page
+
+aidanW -- 2024-12-05 20:40
+* Added auto-generated template for HTML documents
+* Added button to dashboard page for html for testing
+    - Fixed use of redirect in login and register page for working Flask app deliverable
+* Updated calendar route for correct spelling in __init__.py
