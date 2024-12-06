@@ -41,9 +41,9 @@ def create():
 def edit():
     return render_template("edit.html")
 
-@app.route('/calender')
+@app.route('/calendar')
 def calender():
-    return render_template("calender.html")
+    return render_template("calendar.html")
 
 @app.route('/hrecipes')
 def hrecipes():
