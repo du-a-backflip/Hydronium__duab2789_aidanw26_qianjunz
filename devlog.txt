@@ -48,3 +48,6 @@ aidanW -- 2024-12-05 20:40
 * Added button to dashboard page for html for testing
     - Fixed use of redirect in login and register page for working Flask app deliverable
 * Updated calendar route for correct spelling in __init__.py
+
+aidanW -- 2024-12-06 11:00
+* Created key retrieving function for APIs
