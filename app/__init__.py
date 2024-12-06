@@ -29,6 +29,7 @@ def register():
         password1 = request.form['password1']
         if password == password1:
             session['username'] = username
+            return redirect(url_for('dashboard'))
     return render_template("register.html")
 
 @app.route('/view', methods = ['GET', 'POST'])
