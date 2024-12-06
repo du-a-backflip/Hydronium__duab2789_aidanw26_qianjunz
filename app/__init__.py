@@ -23,6 +23,12 @@ def login():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        password1 = request.form['password1']
+        if password == password1:
+            session['username'] = username
     return render_template("register.html")
 
 @app.route('/view', methods = ['GET', 'POST'])
@@ -55,6 +61,7 @@ def settings():
 
 @app.route('/logout')
 def logout():
+    session.pop('username', None)
     return redirect(url_for('dashboard'))
 
 
