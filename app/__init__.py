@@ -17,39 +17,39 @@ app.secret_key = os.urandom(32)
 def dashboard():
     return render_template("dashboard.html", logged_in = False)
 
-@app.route('/login')
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     return render_template("login.html")
 
-@app.route('/register')
+@app.route('/register', methods = ['GET', 'POST'])
 def register():
     return render_template("register.html")
 
-@app.route('/view')
+@app.route('/view', methods = ['GET', 'POST'])
 def view():
     return render_template("view.html")
 
-@app.route('/search')
+@app.route('/search', methods = ['GET', 'POST'])
 def search():
     return render_template("search.html")
 
-@app.route('/create')
+@app.route('/create', methods = ['GET', 'POST'])
 def create():
     return render_template("create.html")
 
-@app.route('/edit')
+@app.route('/edit', methods = ['GET', 'POST'])
 def edit():
     return render_template("edit.html")
 
-@app.route('/calendar')
+@app.route('/calendar', methods = ['GET', 'POST'])
 def calender():
     return render_template("calendar.html")
 
-@app.route('/hrecipes')
+@app.route('/hrecipes', methods = ['GET', 'POST'])
 def hrecipes():
     return render_template("hrecipes.html")
 
-@app.route('/settings')
+@app.route('/settings', methods = ['GET', 'POST'])
 def settings():
     return render_template("settings.html")
 
