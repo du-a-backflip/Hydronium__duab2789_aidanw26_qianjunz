@@ -15,7 +15,7 @@ app.secret_key = os.urandom(32)
 
 @app.route('/')
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", logged_in = False)
 
 @app.route('/login')
 def login():

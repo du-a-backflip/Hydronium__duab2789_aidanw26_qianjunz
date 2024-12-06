@@ -11,8 +11,13 @@
 		<a href = "{{url_for('dashboard')}}">Dashboard</a>
 		<a href = "{{url_for('calender')}}">Calendar</a>
 		<a href = "{{url_for('settings')}}">Settings</a>
+		{% if logged_in %}
+			<a href = "{{url_for('edit')}}">Edit Recipe</a>
+			<a href = "{{url_for('create')}}">Create New Recipe</a>
+		{% endif %}
 	</nav>
-    <a href = "{{url_for('login')}}"> Login Here! </a>
+
+   	<a href = "{{url_for('login')}}"> Login Here! </a>
 	<a href = "{{url_for('register')}}">Register Here!</a>
 </body>
 </html>
