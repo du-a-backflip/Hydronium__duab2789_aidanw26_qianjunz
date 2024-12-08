@@ -61,3 +61,7 @@ aidanW -- 2024-12-06 11:00
 aidanW -- 2024-12-08 12:15
 * Created functioning calendarific API call function with error handling 
     - Updated __init__.py and calendar.html files to test this function
+
+aidanW -- 2024-12-08 14:03
+* Created functioning giphyAPI call function with error handling 
+    - Updated __init__.py and dashboard.html files to test this function
