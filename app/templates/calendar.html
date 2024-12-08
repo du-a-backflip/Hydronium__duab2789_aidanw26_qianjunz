@@ -15,8 +15,19 @@
       <a href = "{{url_for('create')}}">Create New Recipe</a>
     {% endif %}
 	</nav>
+  <p>{{ errorMSG }}</p>
+  <ul>
+    {% for holiday in holidays %}
+      <li>
+        <h3>Name: {{holiday["name"]}}</h3>
+        <p>Date: {{holiday["date"]}}</p>
+        <p>Description: {{holiday["description"]}}</p>
+        <p>Type: {{holiday["type"]}}</p>
+      </li>
+    {% endfor %}
+  </ul>
     <p>Work in Progress
 		<a href = "{{url_for('dashboard')}}"> Go Back to Dashboard </a>
-	</p>
+	  </p>
 </body>
 </html>
