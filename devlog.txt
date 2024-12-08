@@ -57,3 +57,7 @@ duab -- 2024-12-06 11:00
 
 aidanW -- 2024-12-06 11:00
 * Created key retrieving function for APIs
+
+aidanW -- 2024-12-08 12:15
+* Created functioning calendarific API call function with error handling 
+    - Updated __init__.py and calendar.html files to test this function
