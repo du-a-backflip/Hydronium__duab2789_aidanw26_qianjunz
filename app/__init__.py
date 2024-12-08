@@ -9,6 +9,8 @@ Time Spent: 2
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3, os
 
+from customModules import APIModules, DBModules
+
 app = Flask(__name__)
 
 app.secret_key = os.urandom(32)
@@ -50,7 +52,16 @@ def edit():
 
 @app.route('/calendar', methods = ['GET', 'POST'])
 def calender():
-    return render_template("calendar.html")
+
+    holidays = APIModules.getHolidays("2024")
+
+    if holidays == 404:
+        return render_template("calendar.html", errorMSG = "API KEY NOT FOUND")
+    if holidays == 405:
+        return render_template("calendar.html", errorMSG="INVALID API NAME")
+
+
+    return render_template("calendar.html", holidays=holidays)
 
 @app.route('/hrecipes', methods = ['GET', 'POST'])
 def hrecipes():
