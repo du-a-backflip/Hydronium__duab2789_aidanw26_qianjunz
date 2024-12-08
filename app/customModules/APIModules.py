@@ -40,24 +40,64 @@ def getHolidays(year, country="US"): # Default country to US if not given
 
     paramString = urlencode(params)
     url = f"https://calendarific.com/api/v2/holidays?{paramString}"
-    headers = {'User-Agent': 'Mozilla/5.0'} # 
+    headers = {'User-Agent': 'Mozilla/5.0'} 
     request = urllib.request.Request(url, headers=headers)
 
     holidaysList = []
-
-    with urllib.request.urlopen(request) as response:
-        data = json.loads(response.read().decode('utf-8'))
-        holidays = data.get('response', {}).get('holidays', [])
-        
-
-        for holiday in holidays:
-            holidaysList.append({
-                "name": holiday.get("name"),
-                "date": holiday.get("date", {}).get("iso"),
-                "description": holiday.get("description"),
-                "type": holiday.get("type", [])
-            })
     
-    return holidaysList
+    try:
+        with urllib.request.urlopen(request) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            holidays = data.get('response', {}).get('holidays', [])
+            
 
+            for holiday in holidays:
+                holidaysList.append({
+                    "name": holiday.get("name"),
+                    "date": holiday.get("date", {}).get("iso"),
+                    "description": holiday.get("description"),
+                    "type": holiday.get("type", [])
+                })
+        return holidaysList
     
+    except Exception as e:
+        return 403
+
+
+############################# GiphyAPI #############################
+
+def getGif(tag):
+
+    APIKEY = getKey("giphy")
+
+    if APIKEY == "KEY NOT FOUND": # Easy error handling if needed
+        return 404
+    if APIKEY == "INVALID API NAME":
+        return 405
+    
+    params = {
+        "api_key": APIKEY,
+        "tag": tag
+    }
+
+    paramString = urlencode(params)
+    url = f"https://api.giphy.com/v1/gifs/random?{paramString}"
+    headers = {'User-Agent': 'Mozilla/5.0'} 
+    request = urllib.request.Request(url, headers=headers)
+
+    try:
+        with urllib.request.urlopen(request) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            if 'data' in data and data['data']:
+                return {"link": data['data']['images']["original"]["url"], "title": data['data']['title']}
+            else:
+                return "No gif found"
+    
+    except Exception as e:
+        return 403
+
+############################# SearchAPI #############################
+
+############################# Spoonacular #############################
+
+
