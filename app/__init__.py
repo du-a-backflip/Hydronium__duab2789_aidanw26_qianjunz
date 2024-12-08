@@ -17,7 +17,17 @@ app.secret_key = os.urandom(32)
 
 @app.route('/', methods = ['GET', 'POST'])
 def dashboard():
-    return render_template("dashboard.html", logged_in = False)
+
+    gifInformation = APIModules.getGif("Troll")
+
+    if gifInformation == 403:
+        return render_template("dashboard.html", logged_in = False, errorMSG="HTTP 402 FORBIDDEN ERROR")
+    if gifInformation == 404:
+        return render_template("dashboard.html", logged_in = False, errorMSG = "API KEY NOT FOUND")
+    if gifInformation == 405:
+        return render_template("dashboard.html", logged_in = False, errorMSG="INVALID API NAME")
+
+    return render_template("dashboard.html", logged_in = False, gif=gifInformation["link"], gifTitle=gifInformation["title"])
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -55,11 +65,12 @@ def calender():
 
     holidays = APIModules.getHolidays("2024")
 
+    if holidays == 403:
+        return render_template("calendar.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
     if holidays == 404:
         return render_template("calendar.html", errorMSG = "API KEY NOT FOUND")
     if holidays == 405:
         return render_template("calendar.html", errorMSG="INVALID API NAME")
-
 
     return render_template("calendar.html", holidays=holidays)
 
