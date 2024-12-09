@@ -13,7 +13,7 @@ def getKey(apiName):
     else:
         return "INVALID API NAME"
 
-    keyFile = "keys/" + apiFile
+    keyFile = "../keys/" + apiFile
     with open(keyFile, "r") as keyFile:
         api_key = keyFile.read().strip()
         if api_key == "":
@@ -100,4 +100,33 @@ def getGif(tag):
 
 ############################# Spoonacular #############################
 
+def getRecipes(query):
+
+    APIKEY = getKey("spoonacular")
+
+    if APIKEY == "KEY NOT FOUND": # Easy error handling if needed
+        return 404
+    if APIKEY == "INVALID API NAME":
+        return 405
+    
+    params = {
+        "apiKey": APIKEY,
+        "query": query
+    }
+
+    paramString = urlencode(params)
+    url = f"https://api.spoonacular.com/recipes/complexSearch?{paramString}"
+    print(url)
+    headers = {'User-Agent': 'Mozilla/5.0'} 
+    request = urllib.request.Request(url, headers=headers)
+
+    try:
+        with urllib.request.urlopen(request) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            print(data)
+    
+    except Exception as e:
+        return 403
+
+getRecipes("Chicken")
 
