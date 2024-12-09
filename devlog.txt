@@ -68,3 +68,6 @@ aidanW -- 2024-12-08 14:03
 	
 duaB -- 2024-12-09 9:20
 * Created pages for creating and editing recipes
+
+aidanW -- 2024-12-09 10:38
+* Added database interaction functions with the user table
