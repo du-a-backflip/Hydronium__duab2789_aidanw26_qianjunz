@@ -69,5 +69,6 @@ aidanW -- 2024-12-08 14:03
 duaB -- 2024-12-09 9:20
 * Created pages for creating and editing recipes
 
-aidanW -- 2024-12-09 10:38
+aidanW -- 2024-12-09 10:57
 * Added database interaction functions with the user table
+* Added spoonacular key retrival and api search function
