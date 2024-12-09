@@ -11,7 +11,7 @@ def initDB():
     c.execute("""
               CREATE TABLE IF NOT EXISTS users (
               username TEXT, 
-              password TEXT
+              password TEXT,
               profileImage TEXT,
               )
               """) # creates login database
@@ -36,3 +36,33 @@ def initDB():
     
     db.commit() #save changes
     db.close()  #close database
+
+############################# User Database Interations #############################
+
+def addUser(username, password):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    query = "INSERT INTO users (username, password) VALUES (?, ?)"
+    c.execute(query, (username, password))
+    db.commit()
+    db.close()
+
+def checkUser(username, password):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT * FROM users WHERE username = ?", (username, )) # Passing username as a single element tuple
+    user = c.fetchone() # Checks to see if any rows were returned
+    if user is not None:
+        if password == user[1]:
+            return True
+    return False
+
+def registerUser(username, password):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT * FROM users WHERE username = ?", (username, )) # Passing username as a single element tuple
+    user = c.fetchone() # Checks to see if any rows were returned
+    if user is None:
+        addUser(username, password)
+        return True
+    return False
