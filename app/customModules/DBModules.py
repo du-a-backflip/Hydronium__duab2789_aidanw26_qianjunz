@@ -21,7 +21,7 @@ def initDB():
               recipeName TEXT, 
               recipeData TEXT,
               userStatus INTEGER, 
-              PRIMARY KEY(recipeID, recipeName)
+              PRIMARY KEY(recipeID, recipeName),
               )
               """) # creates story database
     c.execute("""
