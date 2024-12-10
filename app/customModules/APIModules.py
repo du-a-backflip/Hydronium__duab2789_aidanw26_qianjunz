@@ -121,12 +121,21 @@ def getRecipes(query):
     request = urllib.request.Request(url, headers=headers)
 
     try:
-        with urllib.request.urlopen(request) as response:
-            data = json.loads(response.read().decode('utf-8'))
-            print(data)
+        with urllib.request.urlopen(request, timeout=10) as response:
+            if response.getcode() == 200:
+                data = json.loads(response.read().decode('utf-8'))
+                results = data.get("results", [])
+
+                fullList = [
+                    {"id": item["id"], "title": item["title"], "image": item["image"]}
+                    for item in results
+                ]
+                return fullList
+            else:
+                return "RATE-LIMITED"
     
     except Exception as e:
+        print(f"Exception occurred: {e}")
         return 403
 
-getRecipes("Chicken")
 
