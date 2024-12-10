@@ -17,20 +17,26 @@ app.secret_key = os.urandom(32)
 
 @app.route('/', methods = ['GET', 'POST'])
 def dashboard():
-
     gifInformation = APIModules.getGif("Troll")
-
     if gifInformation == 403:
         return render_template("dashboard.html", logged_in = False, errorMSG="HTTP 402 FORBIDDEN ERROR")
     if gifInformation == 404:
         return render_template("dashboard.html", logged_in = False, errorMSG = "API KEY NOT FOUND")
     if gifInformation == 405:
         return render_template("dashboard.html", logged_in = False, errorMSG="INVALID API NAME")
-
+    
+    if 'username' in session:
+        return render_template("dashboard.html", logged_in = True, username = session['username'], gif=gifInformation["link"], gifTitle=gifInformation["title"])
     return render_template("dashboard.html", logged_in = False, gif=gifInformation["link"], gifTitle=gifInformation["title"])
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if DBModules.checkUser(username, password):
+            session['username'] = username
+            return redirect(url_for('dashboard'))
     return render_template("login.html")
 
 @app.route('/register', methods = ['GET', 'POST'])
@@ -39,9 +45,13 @@ def register():
         username = request.form['username']
         password = request.form['password']
         password1 = request.form['password1']
+        
         if password == password1:
-            session['username'] = username
-            return redirect(url_for('dashboard'))
+            if DBModules.registerUser(username, password):
+                session['username'] = username
+                return redirect(url_for('dashboard'))
+            else:
+                return redirect(url_for('register'))
     return render_template("register.html")
 
 @app.route('/view', methods = ['GET', 'POST'])
