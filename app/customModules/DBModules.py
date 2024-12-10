@@ -12,7 +12,7 @@ def initDB():
               CREATE TABLE IF NOT EXISTS users (
               username TEXT, 
               password TEXT,
-              profileImage TEXT,
+              profileImage TEXT
               )
               """) # creates login database
     c.execute("""
@@ -28,8 +28,8 @@ def initDB():
               CREATE TABLE IF NOT EXISTS favRecipes (
               username TEXT, 
               recipeID INTEGER,
-              PRIMARY KEY(username, recipeID)
-              FOREIGN KEY (username) REFERENCES users (username)
+              PRIMARY KEY(username, recipeID),
+              FOREIGN KEY (username) REFERENCES users (username),
               FOREIGN KEY (recipeID) REFERENCES recipes (recipeID)
               )
               """) # creates story database
