@@ -26,7 +26,7 @@ def dashboard():
         return render_template("dashboard.html", logged_in = False, errorMSG="INVALID API NAME")
     
     if 'username' in session:
-        return render_template("dashboard.html", logged_in = True, username = session['username'] gif=gifInformation["link"], gifTitle=gifInformation["title"])
+        return render_template("dashboard.html", logged_in = True, username = session['username'], gif=gifInformation["link"], gifTitle=gifInformation["title"])
     return render_template("dashboard.html", logged_in = False, gif=gifInformation["link"], gifTitle=gifInformation["title"])
 
 @app.route('/login', methods = ['GET', 'POST'])
