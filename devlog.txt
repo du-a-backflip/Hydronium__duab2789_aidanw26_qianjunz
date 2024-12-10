@@ -76,6 +76,9 @@ aidanW -- 2024-12-09 10:57
 qianjunZ -- 2024-12-09 10:57
 * Added the checks to add username and password from sessions to database.
 
+duaB -- 2024-12-09 11:01
+* Started working on rendering calendar for the calendar page.
+
 aidanW -- 2024-12-09 20:55
 * Updated Spoonacular key
 * Created spoonacular search function
