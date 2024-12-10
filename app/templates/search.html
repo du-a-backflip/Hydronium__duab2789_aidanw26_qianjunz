@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Search</title>
 </head>
 <body>
-    
+    <p>{{ errorMSG }}</p>
+    <ul>
+        {% for recipe in recipes %}
+      <li>
+        <h3>ID: {{recipe["id"]}}</h3>
+        <p>Name: {{recipe["title"]}}</p>
+        <img src= "{{ recipe['image'] }}" alt="{{ recipe['image'] }}">
+      </li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
