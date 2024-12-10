@@ -15,6 +15,8 @@ app = Flask(__name__)
 
 app.secret_key = os.urandom(32)
 
+DBModules.initDB()
+
 @app.route('/', methods = ['GET', 'POST'])
 def dashboard():
     gifInformation = APIModules.getGif("Troll")
