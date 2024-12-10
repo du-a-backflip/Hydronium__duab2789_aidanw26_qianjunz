@@ -19,6 +19,9 @@
     <a href = "{{url_for('login')}}"> Login Here! </a>
   	<a href = "{{url_for('register')}}">Register Here!</a>
   {% endif %}
+  {% if logged_in %}
+    <p>{{username}}</p>
+  {% endif %}
   <p>{{ errorMSG }}</p>
   <img src= "{{ gif }}" alt="{{ gifTitle }}">
 </body>

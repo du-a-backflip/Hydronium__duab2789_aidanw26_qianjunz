@@ -60,7 +60,13 @@ def view():
 
 @app.route('/search', methods = ['GET', 'POST'])
 def search():
-    return render_template("search.html")
+
+    foodList = APIModules.getRecipes("Chicken")
+
+    if foodList != "RATE-LIMITED" and foodList != 403:
+        return render_template("search.html", recipes=foodList)
+
+    return render_template("search.html", errorMSG="HAHA API NO WORKY HAHAHAHAHA")
 
 @app.route('/create', methods = ['GET', 'POST'])
 def create():

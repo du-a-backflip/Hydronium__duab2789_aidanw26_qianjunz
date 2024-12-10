@@ -100,4 +100,42 @@ def getGif(tag):
 
 ############################# Spoonacular #############################
 
+def getRecipes(query):
+
+    APIKEY = getKey("spoonacular")
+
+    if APIKEY == "KEY NOT FOUND": # Easy error handling if needed
+        return 404
+    if APIKEY == "INVALID API NAME":
+        return 405
+    
+    params = {
+        "apiKey": APIKEY,
+        "query": query
+    }
+
+    paramString = urlencode(params)
+    url = f"https://api.spoonacular.com/recipes/complexSearch?{paramString}"
+    print(url)
+    headers = {'User-Agent': 'Mozilla/5.0'} 
+    request = urllib.request.Request(url, headers=headers)
+
+    try:
+        with urllib.request.urlopen(request, timeout=10) as response:
+            if response.getcode() == 200:
+                data = json.loads(response.read().decode('utf-8'))
+                results = data.get("results", [])
+
+                fullList = [
+                    {"id": item["id"], "title": item["title"], "image": item["image"]}
+                    for item in results
+                ]
+                return fullList
+            else:
+                return "RATE-LIMITED"
+    
+    except Exception as e:
+        print(f"Exception occurred: {e}")
+        return 403
+
 
