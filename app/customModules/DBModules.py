@@ -28,9 +28,9 @@ def initDB():
               CREATE TABLE IF NOT EXISTS favRecipes (
               username TEXT, 
               recipeID INTEGER,
-              PRIMARY KEY(username, recipeID)
-              FOREIGN KEY (username) REFERENCES users (username)
-              FOREIGN KEY (recipeID) REFERENCES recipes (recipeID)
+              PRIMARY KEY(username, recipeID),
+              FOREIGN KEY (username) REFERENCES users (username),
+              FOREIGN KEY (recipeID) REFERENCES recipes (recipeID),
               )
               """) # creates story database
     
