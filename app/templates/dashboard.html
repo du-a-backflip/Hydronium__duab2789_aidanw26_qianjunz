@@ -20,7 +20,10 @@
   	<a href = "{{url_for('register')}}">Register Here!</a>
   {% endif %}
   {% if logged_in %}
-    <p>{{username}}</p>
+    <form action = "/logout" method = POST>
+      <input type="submit" name="sub1" value=submit>
+    </form>
+    <p> Welcome {{username}}</p>
   {% endif %}
   <p>{{ errorMSG }}</p>
   <img src= "{{ gif }}" alt="{{ gifTitle }}">
