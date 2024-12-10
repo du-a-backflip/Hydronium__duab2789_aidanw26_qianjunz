@@ -24,7 +24,7 @@ def dashboard():
         return render_template("dashboard.html", logged_in = False, errorMSG = "API KEY NOT FOUND")
     if gifInformation == 405:
         return render_template("dashboard.html", logged_in = False, errorMSG="INVALID API NAME")
-    
+
     if 'username' in session:
         return render_template("dashboard.html", logged_in = True, username = session['username'], gif=gifInformation["link"], gifTitle=gifInformation["title"])
     return render_template("dashboard.html", logged_in = False, gif=gifInformation["link"], gifTitle=gifInformation["title"])
@@ -45,7 +45,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         password1 = request.form['password1']
-        
+
         if password == password1:
             if DBModules.registerUser(username, password):
                 session['username'] = username
