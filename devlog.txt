@@ -72,3 +72,8 @@ duaB -- 2024-12-09 9:20
 aidanW -- 2024-12-09 10:57
 * Added database interaction functions with the user table
 * Added spoonacular key retrival and api search function
+
+aidanW -- 2024-12-09 20:55
+* Updated Spoonacular key
+* Created spoonacular search function
+    - Tested function in search page with Jinja templating and adjusting app routing
