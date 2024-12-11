@@ -73,11 +73,15 @@ def search():
 
 @app.route('/create', methods = ['GET', 'POST'])
 def create():
-    return render_template("create.html")
+    if 'username' in session:
+        return render_template("create.html")
+    return redirect(url_for('dashboard'))
 
 @app.route('/edit', methods = ['GET', 'POST'])
 def edit():
-    return render_template("edit.html")
+    if 'username' in session:
+        return render_template("edit.html")
+    return redirect(url_for('dashboard'))
 
 @app.route('/calendar', methods = ['GET', 'POST'])
 def calender():
@@ -99,7 +103,9 @@ def hrecipes():
 
 @app.route('/settings', methods = ['GET', 'POST'])
 def settings():
-    return render_template("settings.html")
+    if 'username' in session:
+        return render_template("settings.html")
+    return render_template('dashboard')
 
 @app.route('/logout')
 def logout():
