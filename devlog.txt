@@ -89,3 +89,4 @@ aidanW -- 2024-12-10 10:56
 
 aidanW -- 2024-12-11 10:46
 * Completed search api function
+* Added default profile picture to dashboard
