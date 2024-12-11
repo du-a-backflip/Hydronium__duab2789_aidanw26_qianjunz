@@ -13,7 +13,7 @@ def getKey(apiName):
     else:
         return "INVALID API NAME"
 
-    keyFile = "keys/" + apiFile
+    keyFile = "../keys/" + apiFile
     with open(keyFile, "r") as keyFile:
         api_key = keyFile.read().strip()
         if api_key == "":
@@ -61,6 +61,7 @@ def getHolidays(year, country="US"): # Default country to US if not given
         return holidaysList
     
     except Exception as e:
+        print(f"Exception occurred: {e}")
         return 403
 
 
@@ -94,9 +95,44 @@ def getGif(tag):
                 return "No gif found"
     
     except Exception as e:
+        print(f"Exception occurred: {e}")
         return 403
 
 ############################# SearchAPI #############################
+
+def getFirstLink(query, engine):
+
+    APIKEY = getKey("search")
+
+    if APIKEY == "KEY NOT FOUND": # Easy error handling if needed
+        return 404
+    if APIKEY == "INVALID API NAME":
+        return 405
+    
+    params = {
+        "api_key": APIKEY,
+        "engine": engine,
+        "q": query
+    }
+
+    paramString = urlencode(params)
+    url = f"https://www.searchapi.io/api/v1/search?{paramString}"
+    headers = {'User-Agent': 'Mozilla/5.0'} 
+    request = urllib.request.Request(url, headers=headers)
+
+    try:
+        with urllib.request.urlopen(request) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            result = data.get("organic_results", [])[0]["link"]
+
+            return result
+    
+    except Exception as e:
+        print(f"Exception occurred: {e}")
+        return 403
+
+# print(getFirstLink("鸡肉盖饭", "baidu"))
+
 
 ############################# Spoonacular #############################
 
@@ -116,7 +152,7 @@ def getRecipes(query):
 
     paramString = urlencode(params)
     url = f"https://api.spoonacular.com/recipes/complexSearch?{paramString}"
-    print(url)
+    # print(url)
     headers = {'User-Agent': 'Mozilla/5.0'} 
     request = urllib.request.Request(url, headers=headers)
 
