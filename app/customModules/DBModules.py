@@ -66,3 +66,5 @@ def registerUser(username, password):
         addUser(username, password)
         return True
     return False
+
+    ############################# User Database Interations #############################
