@@ -174,4 +174,52 @@ def getRecipes(query):
         print(f"Exception occurred: {e}")
         return 403
 
+def getRecipeInformation(id):
+
+    APIKEY = getKey("spoonacular")
+
+    if APIKEY == "KEY NOT FOUND": # Easy error handling if needed
+        return 404
+    if APIKEY == "INVALID API NAME":
+        return 405
+    
+    params = {
+        "apiKey": APIKEY,
+        "id": id,
+        "includeNutrition": True,
+    }
+
+    paramString = urlencode(params)
+    url = f"https://api.spoonacular.com/recipes/complexSearch?{paramString}"
+    # print(url)
+    headers = {'User-Agent': 'Mozilla/5.0'} 
+    request = urllib.request.Request(url, headers=headers)
+
+    try:
+        with urllib.request.urlopen(request, timeout=10) as response:
+            if response.getcode() == 200:
+                data = json.loads(response.read().decode('utf-8'))
+
+                fullList = {
+                    "title": data["title"],
+                    "servings": data["servings"],
+                    "vegetarianStatus": data["vegetarian"],
+                    "veganStatus": data["vegan"],
+                    "glutenFreeStatus": data["glutenFree"],
+                    "dairyFreeStatus": data["dairyFree"],
+                    "veryHealthyStatus": data["veryHealthy"],
+                    "preparationMinutes": data["preparationMinutes"],
+                    "cookingMinutes": data["cookingMinutes"],
+                    "readyInMinutes": data["readyInMinutes"],
+                    "healthScore": data["healthScore"],
+                    "creditsText": data["creditsText"],
+
+                }
+                return fullList
+            else:
+                return "RATE-LIMITED"
+    
+    except Exception as e:
+        print(f"Exception occurred: {e}")
+        return 403
 
