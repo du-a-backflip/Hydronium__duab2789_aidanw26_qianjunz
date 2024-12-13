@@ -90,3 +90,6 @@ aidanW -- 2024-12-10 10:56
 aidanW -- 2024-12-11 11:01
 * Completed search api function
 * Added default profile picture to dashboard
+
+aidanW -- 2024-12-11 11:00
+* Started work on Spoonacular recipe retrieval function
