@@ -1,22 +1,24 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title> HydroChef Login </title>
-  </head>
-  <body>
-    <h1>Login</h1>
-    <form action = "/login" method = "POST">
-      <input type="text" name="username" placeholder = "Username">
-      <br><br>
-      <input type="password" name="password" placeholder="Password">
-      <br><br>
-      <input type="submit" name="sub1" value=submit>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/login.css')}}"/>
+  <title>Sign In</title>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Sign In</h1>
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+      <input type="password" name="password" placeholder="Password" autocomplete="off" required>
+      <input type="submit" value="Login" autocomplete="off">
     </form>
-    <br>
-    <p>
-      Need an account?
-      <a href = "{{url_for('register')}}"> Register Here! </a>
-    </p>
-	<a href = "{{url_for('dashboard')}}"> Go Back to Dashboard </a>
-  </body>
+
+    <a href = "{{url_for('register')}}" style="text-decoration: none;"> Create Account </a>
+  </div>
+    
+    
+</body>
 </html>

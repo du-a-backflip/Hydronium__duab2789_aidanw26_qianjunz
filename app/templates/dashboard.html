@@ -12,8 +12,8 @@
     <ul class="menu align-right margin-top-10">
       
       <div class="nav-right-items grid-x">
-        <li><a href = "{{url_for('calender')}}" style="color: white">Calendar</a></li>
-        <li><a href = "{{url_for('calender')}}" style="color: white">Community</a></li>
+        <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
+        <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
         <li>
           <div style="position: relative; display: inline-block;">
             <input type="checkbox" id="dropdown-toggle">
@@ -31,17 +31,29 @@
           </div>
         </li>
       </div>
+
+      {% if logged_in %}
+      <div style="position: relative; display: inline-block;">
+        <input type="checkbox" id="dropdown-toggle">
+        <label for="dropdown-toggle2">
+          <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
+        </label>
+
+        <div class="dropdown-menu2">
+          <ul>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">Create Recipe</a></li>
+            <li><a href="#">Saved Recipes</a></li>
+          </ul>
+        </div>
+      </div>
+      {% endif %}
       
       {% if not logged_in %}
         <div class="sign_in_btn">
           <a class="button primary" href="{{url_for('login')}}" style="border-radius: 20px;">Sign In</a>
         </div>
       {% endif %}
-
-      {% if logged_in %}
-          <li><a href = "{{url_for('settings')}}">Settings</a></li>
-			    <li><a href = "{{url_for('create')}}">Create New Recipe</a></li>
-		  {% endif %}
     </ul>
 	</nav>
 
@@ -60,20 +72,5 @@
       </div>
     </form>
   </div>
-
-  
-
-  
-
-  {% if logged_in %}
-    <form action = "/logout" method = POST>
-      <input type="submit" name="sub1" value=submit>
-    </form>
-    <button>
-    	<a href="/logout"> Log Out </a>
-    </button>
-    <p> Welcome {{username}}</p>
-    <img src = "https://assets.bigcartel.com/product_images/371150143/Catburger+Bigcartel.jpg?auto=format&fit=max&w=900" alt="defaultpfp">
-  {% endif %}
 </body>
 </html>
