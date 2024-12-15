@@ -20,6 +20,7 @@ DBModules.initDB()
 
 @app.route('/', methods = ['GET', 'POST'])
 def dashboard():
+    """
     gifInformation = APIModules.getGif("Troll")
     if gifInformation == 403:
         return render_template("dashboard.html", logged_in = False, errorMSG="HTTP 402 FORBIDDEN ERROR")
@@ -27,15 +28,16 @@ def dashboard():
         return render_template("dashboard.html", logged_in = False, errorMSG = "API KEY NOT FOUND")
     if gifInformation == 405:
         return render_template("dashboard.html", logged_in = False, errorMSG="INVALID API NAME")
-    
+    """
+
     if request.method == 'POST':
         query = request.form.get("query")
         if query:
             return redirect(url_for('search', queryS=query))
 
     if 'username' in session:
-        return render_template("dashboard.html", logged_in = True, username = session['username'], gif=gifInformation["link"], gifTitle=gifInformation["title"])
-    return render_template("dashboard.html", logged_in = False, gif=gifInformation["link"], gifTitle=gifInformation["title"])
+        return render_template("dashboard.html", logged_in = True, username = session['username'])
+    return render_template("dashboard.html", logged_in = False)
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
