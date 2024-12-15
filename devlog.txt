@@ -93,3 +93,8 @@ aidanW -- 2024-12-11 11:01
 
 aidanW -- 2024-12-11 11:00
 * Started work on Spoonacular recipe retrieval function
+
+aidanW -- 2024-12-14 10:50
+* Filtered out duplicate holidays in calendar
+    - Created view button for individual holidays that lead to a recipe page taken from the internet
+* Created search bar that searches spoonacular for recipes in dashboard
