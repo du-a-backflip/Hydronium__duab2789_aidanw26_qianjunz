@@ -35,6 +35,10 @@
         <p>Date: {{holiday["date"]}}</p>
         <p>Description: {{holiday["description"]}}</p>
         <p>Type: {{holiday["type"]}}</p>
+        <form action="{{ url_for('holidayRedirect') }}" method="get" target="_blank" style="display:inline;">
+          <input type="hidden" name="query" value="{{ holiday['name'] }} holiday food recipes">
+          <button type="submit">View</button>
+        </form>
       </li>
     {% endfor %}
   </ul>

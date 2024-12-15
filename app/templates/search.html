@@ -6,15 +6,20 @@
     <title>Search</title>
 </head>
 <body>
-    <p>{{ errorMSG }}</p>
-    <ul>
-        {% for recipe in recipes %}
-      <li>
-        <h3>ID: {{recipe["id"]}}</h3>
-        <p>Name: {{recipe["title"]}}</p>
-        <img src= "{{ recipe['image'] }}" alt="{{ recipe['image'] }}">
-      </li>
-    {% endfor %}
-    </ul>
+  <h1>Search Results</h1>
+  {% if errorMSG %}
+      <p>{{ errorMSG }}</p>
+  {% else %}
+      <h2>Results for "{{ query }}"</h2>
+      <ul>
+          {% for recipe in recipes %}
+              <li>
+                  <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="width:100px;height:100px;">
+                  <p>{{ recipe.title }}</p>
+              </li>
+          {% endfor %}
+      </ul>
+  {% endif %}
+  <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
 </body>
 </html>
