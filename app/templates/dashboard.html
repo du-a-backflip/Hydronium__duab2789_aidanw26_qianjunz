@@ -1,108 +1,79 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hydronium</title>
-    <!--Imports the CSS Stylesheet-->
-    <link href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" rel="stylesheet">
-    <style>
-        * {box-sizing: border-box;}
-        
-        .search-container {
-          float: middle;
-        }
-        
-        .search-container input[type=text] {
-          padding: 6px;
-          margin-top: 8px;
-          font-size: 20px;
-          border: none;
-        }
-        
-        .search-container button {
-          float: middle;
-          padding: 6px;
-          margin-top: 5px;
-          margin-right: 16px;
-          background: #ddd;
-          font-size: 17px;
-          border: none;
-          cursor: pointer;
-        }
-        
-        .search-container button:hover {
-          margin-top: 8px;
-          
-          background: #ccc;
-        }
-        </style>
-  </head>
-  <!--Top Navigation with dropdown menu and search box-->
-  <body>
-  <div class="top-bar" id="example-menu">
-    <div class="top-bar-right">
-      <ul class="dropdown menu" data-dropdown-menu>
-          <li>
-            <img src="data:image/png;base64,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" alt="Settings" width="50" length="50"/>
-            <ul class="menu vertical">
-              <li><h1></h1>>Buttons and bars to choose then a submit button that saves to session</h1></li>
-            </ul>
-          </li>
-          <li>
-            <img src="data:image/png;base64,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" alt="Links" width="50" length="50"/>
-            <ul class="menu vertical">
-                <li><a href = "{{url_for('dashboard')}}">Dashboard</a></li>
-                <li><a href = "{{url_for('calender')}}">Calendar</a></li>
-                {% if logged_in %}
-                    <li><a href = "{{url_for('settings')}}">Settings</a></li>
-                    <li><a href = "{{url_for('create')}}">Create New Recipe</a></li>
-                {% endif %}
-            </ul>
-          </li>
-          <li>
-            <img src="https://ih1.redbubble.net/image.3072258676.1731/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg" alt="Default Profile Image" width="50" length="50"/>
-            <ul class="menu vertical">
-              {% if not logged_in %}
-                <li><a href = "{{url_for('login')}}"> Login Here! </a></li>
-                <li><a href = "{{url_for('register')}}">Register Here!</a></li>
-              {% endif %}
-              {% if logged_in %}
-                <li>{{username}}</li>
-                <li>
-                <button>
-    	        <a href="/logout"> Log Out </a>
-                </button>
-                </li>
-              {% endif %}
-            </ul>
-          </li>
-      </ul>
-    </div>
-  </div> 
-  <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7-OxnqnN6gFDp_9ykK6MpfT3WvthtYeBMmQ&s" alt = "Main Image" width = "400" length = "400" />
-  <p>{{ errorMSG }}</p>
-    <div class="top-bar-right">
-        <ul class="menu">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dashboard.css')}}"/>
+    <title>Dashboard</title>
+</head>
+<body>
+  <nav class="navbar">
+    <ul class="menu align-right margin-top-10">
+      
+      <div class="nav-right-items grid-x">
+        <li><a href = "{{url_for('calender')}}" style="color: white">Calendar</a></li>
+        <li><a href = "{{url_for('calender')}}" style="color: white">Community</a></li>
         <li>
-            <form method="GET" action="">
-            <div class="input-group">
-                <input class="input-group-field" type="text" name="query" placeholder="Search recipes..." required>
-                <div class="input-group-button">
-                <input type="submit" class="button" value="Submit">
-                </div>
+          <div style="position: relative; display: inline-block;">
+            <input type="checkbox" id="dropdown-toggle">
+            <label for="dropdown-toggle">
+              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
+            </label>
+
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">Create Recipe</a></li>
+                <li><a href="#">Saved Recipes</a></li>
+              </ul>
             </div>
-            </form>
+          </div>
         </li>
-        </ul>
-    </div>
-  <!-- Imports JQuery and Foundation JS from CDN to enable scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
-  <!--Necessary line to use CSS and scripts-->
-  <script>
-    $(document).foundation();
-  </script>
+      </div>
+      
+      {% if not logged_in %}
+        <div class="sign_in_btn">
+          <a class="button primary" href="{{url_for('login')}}" style="border-radius: 20px;">Sign In</a>
+        </div>
+      {% endif %}
+
+      {% if logged_in %}
+          <li><a href = "{{url_for('settings')}}">Settings</a></li>
+			    <li><a href = "{{url_for('create')}}">Create New Recipe</a></li>
+		  {% endif %}
+    </ul>
+	</nav>
+
+  <div class="text-center">
+    <a href="{{url_for('dashboard')}}">
+      <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/y9vv9llgqhhmhp21yl7m" alt="logo" class="logo">
+    </a>
+  </div>
+
+  <div class="search-container">
+    <form method="POST">
+      <div class="grid-x grid-padding-x align-center">
+        <div class="cell medium-4">
+          <input class="input-group-field" type="text" name="query" placeholder="Search recipes..." autocomplete="off" style="border-radius: 20px; height: 50px;" required>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  
+
+  
+
+  {% if logged_in %}
+    <form action = "/logout" method = POST>
+      <input type="submit" name="sub1" value=submit>
+    </form>
+    <button>
+    	<a href="/logout"> Log Out </a>
+    </button>
+    <p> Welcome {{username}}</p>
+    <img src = "https://assets.bigcartel.com/product_images/371150143/Catburger+Bigcartel.jpg?auto=format&fit=max&w=900" alt="defaultpfp">
+  {% endif %}
 </body>
 </html>
