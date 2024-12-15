@@ -50,14 +50,18 @@ def getHolidays(year, country="US"): # Default country to US if not given
             data = json.loads(response.read().decode('utf-8'))
             holidays = data.get('response', {}).get('holidays', [])
             
+            existingNames = set()
 
             for holiday in holidays:
-                holidaysList.append({
-                    "name": holiday.get("name"),
-                    "date": holiday.get("date", {}).get("iso"),
-                    "description": holiday.get("description"),
-                    "type": holiday.get("type", [])
-                })
+                name = holiday.get("name")
+                if name not in existingNames:
+                    holidaysList.append({
+                        "name": holiday.get("name"),
+                        "date": holiday.get("date", {}).get("iso"),
+                        "description": holiday.get("description"),
+                        "type": holiday.get("type", [])
+                    })
+                    existingNames.add(name)
         return holidaysList
     
     except Exception as e:
@@ -100,7 +104,7 @@ def getGif(tag):
 
 ############################# SearchAPI #############################
 
-def getFirstLink(query, engine):
+def getFirstLink(query, engine="google"):
 
     APIKEY = getKey("search")
 
