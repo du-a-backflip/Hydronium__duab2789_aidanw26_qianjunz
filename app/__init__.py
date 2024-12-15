@@ -27,6 +27,11 @@ def dashboard():
         return render_template("dashboard.html", logged_in = False, errorMSG = "API KEY NOT FOUND")
     if gifInformation == 405:
         return render_template("dashboard.html", logged_in = False, errorMSG="INVALID API NAME")
+    
+    if request.method == 'POST':
+        query = request.form.get("query")
+        if query:
+            return redirect(url_for('search', queryS=query))
 
     if 'username' in session:
         return render_template("dashboard.html", logged_in = True, username = session['username'], gif=gifInformation["link"], gifTitle=gifInformation["title"])
@@ -65,15 +70,20 @@ def register():
 def view():
     return render_template("view.html")
 
-@app.route('/search', methods = ['GET', 'POST'])
-def search():
+@app.route('/search/<queryS>', methods = ['GET', 'POST'])
+def search(queryS):
 
-    foodList = APIModules.getRecipes("Chicken")
+    if not queryS:
+        return render_template("search.html", errorMSG="No search query provided.")
+    
+    foodList = APIModules.getRecipes(queryS)
 
-    if foodList != "RATE-LIMITED" and foodList != 403:
-        return render_template("search.html", recipes=foodList)
+    if foodList == "RATE-LIMITED":
+        return render_template("search.html", errorMSG="API rate limit reached.")
+    if foodList == 403:
+        return render_template("search.html", errorMSG="API not accessible. (HTTP 403)")
 
-    return render_template("search.html", errorMSG="HAHA API NO WORKY HAHAHAHAHA")
+    return render_template("search.html", recipes=foodList, query=queryS)
 
 @app.route('/create', methods = ['GET', 'POST'])
 def create():
@@ -115,6 +125,12 @@ def settings():
 def logout():
     session.pop('username', None)
     return redirect(url_for('dashboard'))
+
+@app.route("/holiday_redirect")
+def holidayRedirect():
+    query = request.args.get('query')
+
+    return redirect(APIModules.getFirstLink(query))
 
 
 if __name__ == "__main__":
