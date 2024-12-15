@@ -7,7 +7,7 @@ body {
     background-color: #202124; 
 }
 
-.login-container {
+.register-container {
     background: #fff; 
     padding: 2rem;
     border-radius: 10px;
@@ -16,18 +16,18 @@ body {
     text-align: center;
 }
 
-.login-container h1 {
+.register-container h1 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
     color: #202124;
 }
 
-.login-container form {
+.register-container form {
     margin-top: 1rem;
 }
 
-.login-container input[type="text"],
-.login-container input[type="password"] {
+.register-container input[type="text"],
+.register-container input[type="password"] {
     width: 100%;
     margin-bottom: 1rem;
     padding: 0.75rem;
@@ -36,7 +36,7 @@ body {
     font-size: 1rem;
 }
 
-.login-container input[type="submit"] {
+.register-container input[type="submit"] {
     background-color: #1a73e8;
     color: #fff;
     border: none;
@@ -47,11 +47,11 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.login-container input[type="submit"]:hover {
+.register-container input[type="submit"]:hover {
     background-color: #1765c1;
 }
 
-.login-container a {
+.register-container a {
     display: block;
     margin-top: 1rem;
     color: #1a73e8;
