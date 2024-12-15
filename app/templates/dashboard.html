@@ -23,9 +23,9 @@
 
             <div class="dropdown-menu">
               <ul>
-                <li><a href="#">My Profile</a></li>
                 <li><a href="#">Create Recipe</a></li>
                 <li><a href="#">Saved Recipes</a></li>
+                <li><a href="#">About</a></li>
               </ul>
             </div>
           </div>
@@ -34,16 +34,18 @@
 
       {% if logged_in %}
       <div style="position: relative; display: inline-block;">
-        <input type="checkbox" id="dropdown-toggle">
+        <input type="checkbox" id="dropdown-toggle2">
         <label for="dropdown-toggle2">
           <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
         </label>
 
         <div class="dropdown-menu2">
           <ul>
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#">Create Recipe</a></li>
-            <li><a href="#">Saved Recipes</a></li>
+            <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
+            <h3>Hello {{ username }}</h3>
+            <a class="button">Manage Account</a>
+            <hr> 
+            <a class="button alert" href="{{url_for('logout')}}">Logout</a>
           </ul>
         </div>
       </div>
@@ -69,8 +71,25 @@
         <div class="cell medium-4">
           <input class="input-group-field" type="text" name="query" placeholder="Search recipes..." autocomplete="off" style="border-radius: 20px; height: 50px;" required>
         </div>
+        <div class="cell shrink">
+          <div style="position: relative; display: inline-block;">
+            <input type="checkbox" id="dropdown-toggle3">
+            <label for="dropdown-toggle3">
+              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/q7vj16hmpmbmydtcu3wd" alt="filter" class="filter">
+            </label>
+        
+            <div class="dropdown-menu3">
+              
+            </div>
+          </div>
+        </div>
       </div>
     </form>
+
+    
   </div>
+
+  
+
 </body>
 </html>
