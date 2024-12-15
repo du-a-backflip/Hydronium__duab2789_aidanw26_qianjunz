@@ -100,7 +100,7 @@ def edit():
     return redirect(url_for('dashboard'))
 
 @app.route('/calendar', methods = ['GET', 'POST'])
-def calender():
+def calendar():
 
     holidays = APIModules.getHolidays("2024")
 
