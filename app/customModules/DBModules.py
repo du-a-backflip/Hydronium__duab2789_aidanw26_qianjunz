@@ -11,8 +11,7 @@ def initDB():
     c.execute("""
               CREATE TABLE IF NOT EXISTS users (
               username TEXT, 
-              password TEXT,
-              profileImage TEXT
+              password TEXT
               )
               """) # creates login database
     c.execute("""
