@@ -179,11 +179,7 @@ def settings():
         if errormsgs:
             return render_template("settings.html", logged_in=True, username=session['username'], errorMsg = "; ".join(errormsgs))
     
-    return render_template("settings.html", logged_in=True, username=session['username'])
-
-
-
-    
+    return render_template("settings.html", logged_in=True, username=session['username'])   
 
 @app.route('/logout')
 def logout():
