@@ -97,7 +97,7 @@
       <ul class="card">
           {% for recipe in recipes %}
           <li class="cardInfo">
-            <a href="#" style="text-decoration: none;">
+            <a href="{{ url_for('view', queryS=query, recipeID=recipe.id) }}" style="text-decoration: none;">
               <img class="foodpic" src="{{ recipe.image }}" alt="Image not Available">
               <p>{{ recipe.title }}</p>
             </a>

@@ -3,9 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/view.css')}}"/>
+    <title>Recipe Viewer</title>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="top-bar">
+          <div class="top-bar-left">
+            <a href="{{url_for('dashboard')}}">
+              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/y9vv9llgqhhmhp21yl7m" alt="logo" class="logo">
+            </a>
+          </div>
+    
+          <div class="top-bar-right">
+            <ul class="menu align-right margin-top-10" style="background-color: #202124;">
+          
+              <div class="nav-right-items grid-x">
+                <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
+                <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
+                <li>
+                  <div style="position: relative; display: inline-block;">
+                    <input type="checkbox" id="dropdown-toggle">
+                    <label for="dropdown-toggle">
+                      <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
+                    </label>
+        
+                    <div class="dropdown-menu">
+                      <ul>
+                        <li><a href="#">Create Recipe</a></li>
+                        <li><a href="#">Saved Recipes</a></li>
+                        <li><a href="#">About</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </div>
+        
+              {% if logged_in %}
+                <div style="position: relative; display: inline-block;">
+                    <input type="checkbox" id="dropdown-toggle2">
+                    <label for="dropdown-toggle2">
+                    <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
+                    </label>
+
+                    <div class="dropdown-menu2">
+                    <ul>
+                        <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
+                        <h3>Hello {{ username }}</h3>
+                        <a class="button" href="{{url_for('settings')}}">Manage Account</a>
+                        <hr> 
+                        <a class="button alert" href="{{url_for('logout')}}">Logout</a>
+                    </ul>
+                    </div>
+                </div>
+            {% endif %}
+                
+            {% if not logged_in %}
+                <div class="sign_in_btn">
+                <a class="button primary" href="{{url_for('login')}}" style="border-radius: 20px;">Sign In</a>
+                </div>
+            {% endif %}
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <main class="recipe-container">
+        <h1 style="color: white;">{{recipeInformation[0]["title"]}}</h1>
+        <p>{{errorMSG}}</p>
+        <img class="thumbnail" src= "{{ recipeGif }}" alt="GIF unable to Load">
+            <div class="recipe-details">
+                <h2>Details</h2>
+                <ul>
+                    <li><strong>Servings:</strong> {{recipeInformation[0]["servings"]}}</li>
+                    <li><strong>Ready in:</strong> {{recipeInformation[0]["readyInMinutes"]}} minutes</li>
+                    <li><strong>Health Score:</strong> {{recipeInformation[0]["healthScore"]}}</li>
+                    <li><strong>Dish Types:</strong> {{", ".join(recipeInformation[0]["dishTypes"])}}</li>
+                    <li><strong>Credits:</strong> {{recipeInformation[0]["creditsText"]}}</li>
+                </ul>
+
+                <h2>Nutrients</h2>
+                <ul>
+                    {% for nutrient in recipeInformation[1] %}
+                        <li><strong>{{nutrient["name"]}}:</strong> {{nutrient["amount"]}} {{nutrient["unit"]}}</li>
+                    {% endfor %}
+                </ul>
+                
+                <h2>Ingredients</h2>
+                <ul>
+                    {% for ingredient in recipeInformation[2] %}
+                        <li><strong>{{ingredient["name"]}}:</strong> {{ingredient["amount"]}} {{ingredient["unit"]}}</li>
+                    {% endfor %}
+                </ul>
+
+                <h2>Breakdown</h2>
+                <ul>
+                    <li><strong>% Protein: </strong>{{recipeInformation[3]["percentProtein"]}}</li>
+                    <li><strong>% Fat: </strong>{{recipeInformation[3]["percentFat"]}}</li>
+                    <li><strong>% Carbs: </strong>{{recipeInformation[3]["percentCarbs"]}}</li>
+                </ul>
+
+                <h2>Steps</h2>
+                <ul>
+                    {% for step in recipeInformation[4] %}
+                        <h5>Step {{ step["number"] }}: </h5>
+                        <li>{{ step["step"] }}</li>
+                    {% endfor %}
+                </ul>
+        </div>
+    </main>
+
     
 </body>
 </html>
