@@ -119,9 +119,44 @@ def hrecipes():
 
 @app.route('/settings', methods = ['GET', 'POST'])
 def settings():
-    if 'username' in session:
-        return render_template("settings.html")
-    return render_template('dashboard')
+    if 'username' not in session:
+        return redirect(url_for('dashboard'))
+
+    if request.method == 'POST':
+        username = session['username']
+        new_username = request.form.get('username')
+        current_password = request.form.get('password')
+        new_password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
+
+        errormsgs = []
+
+        if new_username:
+            if not DBModules.changeUser(username, new_username, current_password):
+                errormsgs.append("Username Change Failed: Current Password Incorrect/Not Provided")
+            else:
+                flash("Username changed to " + new_username)
+                session['username'] = new_username
+                username = session['username']
+
+        print(current_password)
+        
+        if new_password:
+            if new_password != confirm_password:
+                errormsgs.append("New passwords do not match")
+            if not DBModules.changePassword(username, current_password, new_password):
+                errormsgs.append("Password update failed: Current password incorrect or not provided")
+            else:
+                flash("Password sucessfully changed")
+
+        if errormsgs:
+            return render_template("settings.html", logged_in=True, username=session['username'], errorMsg = "; ".join(errormsgs))
+    
+    return render_template("settings.html", logged_in=True, username=session['username'])
+
+
+
+    
 
 @app.route('/logout')
 def logout():
