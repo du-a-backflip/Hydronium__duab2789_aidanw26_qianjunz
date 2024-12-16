@@ -101,3 +101,8 @@ aidanW -- 2024-12-14 10:50
 
 aidanW -- 2024-12-15 3:08
 * Changed look of dashboard/landing page
+
+aidanW -- 2024-12-15 11:07
+* Implemented and styled Login page, registration page, settings page, search results page
+* Updated navbar to have clickable logo that brings you to home page/dashboard
+* Added nonfunctional filter button next to search bar
