@@ -120,7 +120,14 @@ def calDataName(name):
         return render_template("calendar.html", errorMSG = "API KEY NOT FOUND")
     if data == 405:
         return render_template("calendar.html", errorMSG="INVALID API NAME")
-    return render_template("calData.html", name = name, data=data)
+    
+    logged_in = False
+
+    if 'username' in session:
+        return render_template("calData.html", name = name, data=data, logged_in=True, username = session['username'])
+    
+
+    return render_template("calData.html", name = name, data=data, logged_in=False)
 
 @app.route('/calendar', methods = ['GET', 'POST'])
 def calendar():
@@ -133,6 +140,8 @@ def calendar():
         return render_template("calendar.html", errorMSG = "API KEY NOT FOUND")
     if data == 405:
         return render_template("calendar.html", errorMSG="INVALID API NAME")
+
+
     countneg = -1
     actualDates = {}
     for i in calendarDates:
@@ -157,7 +166,10 @@ def calendar():
                 if (j == int(findValue[3:])):
                     actualDates[int(monthOf)][k][j]=data[i]
     #print(actualDates)
-    return render_template("calendar.html", holidays=actualDates)
+    if 'username' in session:
+        return render_template("calendar.html", holidays=actualDates, logged_in=True, username = session['username'])
+    
+    return render_template("calendar.html", holidays=actualDates, logged_in=False)
 
 @app.route('/hrecipes', methods = ['GET', 'POST'])
 def hrecipes():
