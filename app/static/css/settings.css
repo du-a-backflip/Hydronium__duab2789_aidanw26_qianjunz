@@ -2,6 +2,10 @@ body {
     background-color: #202124;
 }
 
+.top-bar {
+    background-color: #202124;
+}
+
 .nav-right-items {
     padding: 10px 12px;
     margin-top: 14px;
@@ -59,7 +63,12 @@ body {
     text-align: center; 
     width: 50%; 
     font-weight: bold;
+}
 
+.logo {
+    margin-top: 10px;
+    width: 200px;
+    height: auto;
 }
 
 /* For the More Button */
