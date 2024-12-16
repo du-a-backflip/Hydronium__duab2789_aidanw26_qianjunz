@@ -141,7 +141,7 @@ def getFirstLink(query, engine="google"):
 
 ############################# Spoonacular #############################
 
-def getRecipes(query):
+def getRecipes(query, minCarbs=0, maxCarbs=100000, minProtein=10, maxProtein=100000, minCalories=0, maxCalories=100000, minFat=0, maxFat=100000):
 
     APIKEY = getKey("spoonacular")
 
@@ -157,12 +157,20 @@ def getRecipes(query):
         "apiKey": APIKEY,
         "query": query,
         "includeIngredients": ingredients_param,
+        "minCarbs": minCarbs,
+        "maxCarbs": maxCarbs,
+        "minProtein": minProtein,
+        "maxProtein": maxProtein,
+        "minCalories": minCalories,
+        "maxCalories": maxCalories,
+        "minFat": minFat,
+        "maxFat": maxFat,
         "number": 100
     }
 
     paramString = urlencode(params)
     url = f"https://api.spoonacular.com/recipes/complexSearch?{paramString}"
-    # print(url)
+    print(url)
     headers = {'User-Agent': 'Mozilla/5.0'} 
     request = urllib.request.Request(url, headers=headers)
 
