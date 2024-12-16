@@ -16,18 +16,7 @@
     {% endif %}
 	</nav>
   <p>{{ errorMSG }}</p>
-  <div class = "calendar">
-    <table>
-      <tr>
-        <th>Sun</th>
-        <th>Mon</th>
-        <th>Tues</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
-    </table>
-  </div>
+  <!--
   <ul>
     {% for holiday in holidays %}
       <li>
@@ -42,6 +31,43 @@
       </li>
     {% endfor %}
   </ul>
+-->
+  {% for month in holidays %}
+  <table>
+    <tr>
+      <th>Sunday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+    </tr>
+    {% for week in holidays[month] %}
+    <tr>
+      {% for day in holidays[month][week] %}
+      <th>
+        {% if day <= 0 %}
+        <p>filler</p>
+        {% endif %}
+        {% if day > 0 %}
+        <p>{{day}}</p>
+        {% endif %}
+        <p>{{holidays[month][week][day]}}</p>
+        <form action="{{ url_for('holidayRedirect') }}" method="get" target="_blank" style="display:inline;">
+          <input type="hidden" name="query" value="{{ day['name'] }} holiday food recipes">
+          <button type="submit">View</button>
+        </form>
+      </th>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <br>
+  <br>
+  <br>
+  {% endfor %}
     <p>Work in Progress
 		<a href = "{{url_for('dashboard')}}"> Go Back to Dashboard </a>
 	  </p>
