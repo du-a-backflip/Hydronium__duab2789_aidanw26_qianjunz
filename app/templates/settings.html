@@ -9,47 +9,58 @@
 </head>
 <body>
 	<nav class="navbar">
-    <ul class="menu align-right margin-top-10">
-      <div class="nav-right-items grid-x">
-        <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
-        <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
-        <li>
-          <div style="position: relative; display: inline-block;">
-            <input type="checkbox" id="dropdown-toggle">
-            <label for="dropdown-toggle">
-              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
-            </label>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <a href="{{url_for('dashboard')}}">
+          <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/y9vv9llgqhhmhp21yl7m" alt="logo" class="logo">
+        </a>
+      </div>
 
-            <div class="dropdown-menu">
+      <div class="top-bar-right">
+        <ul class="menu align-right margin-top-10" style="background-color: #202124;">
+      
+          <div class="nav-right-items grid-x">
+            <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
+            <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
+            <li>
+              <div style="position: relative; display: inline-block;">
+                <input type="checkbox" id="dropdown-toggle">
+                <label for="dropdown-toggle">
+                  <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
+                </label>
+    
+                <div class="dropdown-menu">
+                  <ul>
+                    <li><a href="#">Create Recipe</a></li>
+                    <li><a href="#">Saved Recipes</a></li>
+                    <li><a href="#">About</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </div>
+    
+          {% if logged_in %}
+          <div style="position: relative; display: inline-block;">
+            <input type="checkbox" id="dropdown-toggle2">
+            <label for="dropdown-toggle2">
+              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
+            </label>
+    
+            <div class="dropdown-menu2">
               <ul>
-                <li><a href="#">Create Recipe</a></li>
-                <li><a href="#">Saved Recipes</a></li>
-                <li><a href="#">About</a></li>
+                <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
+                <h3>Hello {{ username }}</h3>
+                <a class="button" href="{{url_for('settings')}}">Manage Account</a>
+                <hr> 
+                <a class="button alert" href="{{url_for('logout')}}">Logout</a>
               </ul>
             </div>
           </div>
-        </li>
+          {% endif %}
+        </ul>
       </div>
-
-      {% if logged_in %}
-      <div style="position: relative; display: inline-block;">
-        <input type="checkbox" id="dropdown-toggle2">
-        <label for="dropdown-toggle2">
-          <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
-        </label>
-
-        <div class="dropdown-menu2">
-          <ul>
-            <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
-            <h3>Hello {{ username }}</h3>
-            <a class="button" href="{{url_for('settings')}}">Manage Account</a>
-            <hr> 
-            <a class="button alert" href="{{url_for('logout')}}">Logout</a>
-          </ul>
-        </div>
-      </div>
-      {% endif %}
-    </ul>
+    </div>
 	</nav>
 
   {% with messages = get_flashed_messages() %}
