@@ -67,4 +67,36 @@ def registerUser(username, password):
         return True
     return False
 
+def changeUser(oldUsername, newUsername, password):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    c.execute("SELECT * FROM users WHERE username = ?", (oldUsername,))
+    user = c.fetchone()
+
+    if user is None or user[1] != password:
+        db.close()
+        return False
+    
+    c.execute("UPDATE users SET username = ? WHERE username = ?", (newUsername, oldUsername))
+    db.commit()
+    db.close()
+    return True
+
+def changePassword(username, oldPassword, newPassword):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    c.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = c.fetchone()
+
+    if user is None or user[1] != oldPassword:
+        db.close()
+        return False
+    
+    c.execute("UPDATE users SET password = ? WHERE username = ?", (newPassword, username))
+    db.commit()
+    db.close()
+    return True
+
     ############################# User Database Interations #############################
