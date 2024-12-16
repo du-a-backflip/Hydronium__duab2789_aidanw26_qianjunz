@@ -4,153 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dashboard.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/calendar.css')}}"/>
     <title>Calendar</title>
-    <style>
-     body {
-    background-color: #202124;
-}
 
-.top-bar {
-    background-color: #202124;
-}
-
-.nav-right-items {
-    padding: 10px 12px;
-    margin-top: 14px;
-}
-
-.more {
-    width: 40px;
-    height: auto;
-    margin-top: 2px;
-    margin-left: -10px;
-}
-
-.pfp {
-    width: 60px;
-    height: auto;
-    margin-top: 25px;
-    margin-left: -15px;
-    border-radius: 40px;
-}
-
-.pfpInside {
-    width: 100px;
-    height: auto;
-    margin-top: 25px;
-    margin-left: 175px;
-    border-radius: 40px;
-}
-
-.dropdown-menu2 h3 {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.logo {
-    margin-top: 10px;
-    width: 200px;
-    height: auto;
-}
-
-/* For the More Button */
-
-input[type="checkbox"] { /* Keeps the checkbox hidden*/
-    display: none;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    padding: 10px;
-    margin-top: 14px;
-    margin-left: -100px;
-    margin-right: 10px;
-    right: -40px;
-    border-radius: 20px;
-}
-
-input[type="checkbox"]:checked + label + .dropdown-menu { /* Show dropdown on click*/
-    display: block;
-}
-
-/* For the Profile Button */
-
-.dropdown-menu2 {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    padding: 10px;
-    margin-top: 14px;
-    border-radius: 20px;
-    right: 10px;
-    width: 500px;
-    height: 350px;
-}
-
-input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on click*/
-    display: block;
-}
-    </style>
 </head>
 <body>
-  ```
   <nav class="navbar">
-      <div class="top-bar">
-        <div class="top-bar-left">
-          <a href="{{url_for('dashboard')}}">
-            <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/y9vv9llgqhhmhp21yl7m" alt="logo" class="logo">
-          </a>
-        </div>
-  
-        <div class="top-bar-right">
-          <ul class="menu align-right margin-top-10" style="background-color: #202124;">
+        <div class="top-bar">
+          <div class="top-bar-left">
+            <a href="{{url_for('dashboard')}}">
+              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/y9vv9llgqhhmhp21yl7m" alt="logo" class="logo">
+            </a>
+          </div>
+    
+          <div class="top-bar-right">
+            <ul class="menu align-right margin-top-10" style="background-color: #202124;">
+          
+              <div class="nav-right-items grid-x">
+                <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
+                <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
+                <li>
+                  <div style="position: relative; display: inline-block;">
+                    <input type="checkbox" id="dropdown-toggle">
+                    <label for="dropdown-toggle">
+                      <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
+                    </label>
         
-            <div class="nav-right-items grid-x">
-              <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
-              <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
-              <li>
-                <div style="position: relative; display: inline-block;">
-                  <input type="checkbox" id="dropdown-toggle">
-                  <label for="dropdown-toggle">
-                    <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
-                  </label>
-      
-                  <div class="dropdown-menu">
-                    <ul>
-                      <li><a href="#">Create Recipe</a></li>
-                      <li><a href="#">Saved Recipes</a></li>
-                      <li><a href="#">About</a></li>
-                    </ul>
+                    <div class="dropdown-menu">
+                      <ul>
+                        <li><a href="#">Create Recipe</a></li>
+                        <li><a href="#">Saved Recipes</a></li>
+                        <li><a href="#">About</a></li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </div>
-      
-            {% if logged_in %}
-            <div style="position: relative; display: inline-block;">
-              <input type="checkbox" id="dropdown-toggle2">
-              <label for="dropdown-toggle2">
-                <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
-              </label>
-      
-              <div class="dropdown-menu2">
-                <ul>
-                  <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
-                  <h3>Hello {{ username }}</h3>
-                  <a class="button" href="{{url_for('settings')}}">Manage Account</a>
-                  <hr> 
-                  <a class="button alert" href="{{url_for('logout')}}">Logout</a>
-                </ul>
+                </li>
               </div>
-            </div>
+        
+              {% if logged_in %}
+                <div style="position: relative; display: inline-block;">
+                    <input type="checkbox" id="dropdown-toggle2">
+                    <label for="dropdown-toggle2">
+                    <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
+                    </label>
+
+                    <div class="dropdown-menu2">
+                    <ul>
+                        <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
+                        <h3>Hello {{ username }}</h3>
+                        <a class="button" href="{{url_for('settings')}}">Manage Account</a>
+                        <hr> 
+                        <a class="button alert" href="{{url_for('logout')}}">Logout</a>
+                    </ul>
+                    </div>
+                </div>
             {% endif %}
-          </ul>
+                
+            {% if not logged_in %}
+                <div class="sign_in_btn">
+                <a class="button primary" href="{{url_for('login')}}" style="border-radius: 20px;">Sign In</a>
+                </div>
+            {% endif %}
+            </ul>
+          </div>
         </div>
-      </div>
-  </nav>
+    </nav>
   <p>{{ errorMSG }}</p>
   <!--
   <ul>
