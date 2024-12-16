@@ -114,3 +114,4 @@ input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on c
 input[type="checkbox"]:checked + label + .dropdown-menu3 { /* Show dropdown on click*/
     display: block;
 }
+
