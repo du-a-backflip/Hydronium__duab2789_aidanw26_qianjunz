@@ -43,7 +43,7 @@
           <ul>
             <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
             <h3>Hello {{ username }}</h3>
-            <a class="button">Manage Account</a>
+            <a class="button" href="{{url_for('settings')}}">Manage Account</a>
             <hr> 
             <a class="button alert" href="{{url_for('logout')}}">Logout</a>
           </ul>

@@ -3,20 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/settings.css')}}"/>
     <title>Settings Page</title>
 </head>
 <body>
-	<h1>Settings</h1>
-	<nav>
-		<a href = "{{url_for('dashboard')}}">Dashboard</a>
-		<a href = "{{url_for('calender')}}">Calendar</a>
-    {% if logged_in %}
-      <a href = "{{url_for('settings')}}">Settings</a>
-      <a href = "{{url_for('create')}}">Create New Recipe</a>
-    {% endif %}
+	<nav class="navbar">
+    <ul class="menu align-right margin-top-10">
+      <div class="nav-right-items grid-x">
+        <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
+        <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
+        <li>
+          <div style="position: relative; display: inline-block;">
+            <input type="checkbox" id="dropdown-toggle">
+            <label for="dropdown-toggle">
+              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
+            </label>
+
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="#">Create Recipe</a></li>
+                <li><a href="#">Saved Recipes</a></li>
+                <li><a href="#">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </div>
+
+      {% if logged_in %}
+      <div style="position: relative; display: inline-block;">
+        <input type="checkbox" id="dropdown-toggle2">
+        <label for="dropdown-toggle2">
+          <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
+        </label>
+
+        <div class="dropdown-menu2">
+          <ul>
+            <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
+            <h3>Hello {{ username }}</h3>
+            <a class="button" href="{{url_for('settings')}}">Manage Account</a>
+            <hr> 
+            <a class="button alert" href="{{url_for('logout')}}">Logout</a>
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+    </ul>
 	</nav>
-    <p>Work in Progress
-		<a href = "{{url_for('dashboard')}}"> Go Back to Dashboard </a>
-	</p>
+
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                  <div class="alert-flash">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+  <div class="grid-container">
+    <div class="settings-container">
+      <h1>Account Settings</h1>
+      <form method="POST">
+        <label for="username">Change Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter new username" autocomplete="off">
+
+        <label for="password">Current Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter current password" autocomplete="off">
+
+        <label for="password">New Password</label>
+        <input type="password" id="password" name="new_password" placeholder="Enter new password" autocomplete="off">
+
+        <label for="confirm_password">Confirm New Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm new password" autocomplete="off">
+
+        <p id="errortag" style="color:red;">{{errorMsg}}</p>
+
+        <button type="submit" class="button">Save Changes</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
