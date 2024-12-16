@@ -169,39 +169,98 @@ input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on c
   </ul>
 -->
   {% for month in holidays %}
+  {% if month == 1 %}
+  <h1 style = "text-align: center; color: white;">
+    January
+  </h1>
+  {% endif %}
+  {% if month == 2 %}
+  <h1 style = "text-align: center; color: white;">
+    February
+  </h1>
+  {% endif %}
+  {% if month == 3 %}
+  <h1 style = "text-align: center; color: white;">
+    March
+  </h1>
+  {% endif %}
+  {% if month == 4 %}
+  <h1 style = "text-align: center; color: white;">
+    April
+  </h1>
+  {% endif %}
+  {% if month == 5 %}
+  <h1 style = "text-align: center; color: white;">
+    May
+  </h1>
+  {% endif %}
+  {% if month == 6 %}
+  <h1 style = "text-align: center; color: white;">
+    June
+  </h1>
+  {% endif %}
+  {% if month == 7 %}
+  <h1 style = "text-align: center; color: white;">
+    July
+  </h1>
+  {% endif %}
+  {% if month == 8 %}
+  <h1 style = "text-align: center; color: white;">
+    August
+  </h1>
+  {% endif %}
+  {% if month == 9 %}
+  <h1 style = "text-align: center; color: white;">
+    September
+  </h1>
+  {% endif %}
+  {% if month == 10 %}
+  <h1 style = "text-align: center; color: white;">
+    October
+  </h1>
+  {% endif %}
+  {% if month == 11 %}
+  <h1 style = "text-align: center; color: white;">
+    November
+  </h1>
+  {% endif %}
+  {% if month == 12 %}
+  <h1 style = "text-align: center; color: white;">
+    December
+  </h1>
+  {% endif %}
   <table>
     <tr>
-      <th>Sunday</th>
       <th>Monday</th>
       <th>Tuesday</th>
       <th>Wednesday</th>
       <th>Thursday</th>
       <th>Friday</th>
       <th>Saturday</th>
+      <th>Sunday</th>
     </tr>
     {% for week in holidays[month] %}
     <tr>
       {% for day in holidays[month][week] %}
       <th>
         {% if day <= 0 %}
-        <p>filler</p>
+        <p> </p>
         {% endif %}
         {% if day > 0 %}
         <p>{{day}}</p>
         {% endif %}
-        <p>{{holidays[month][week][day]}}</p>
+        <p>{{holidays[month][week][day]['name']}}</p>
+        <!--
         <form action="{{ url_for('holidayRedirect') }}" method="get" target="_blank" style="display:inline;">
           <input type="hidden" name="query" value="{{ day['name'] }} holiday food recipes">
           <button type="submit">View</button>
         </form>
+      -->
       </th>
       {% endfor %}
     </tr>
     {% endfor %}
   </table>
-  <br>
-  <br>
-  <br>
   <br>
   {% endfor %}
     <p>Work in Progress
