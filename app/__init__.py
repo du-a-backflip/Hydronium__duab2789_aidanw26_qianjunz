@@ -24,16 +24,6 @@ DBModules.initDB()
 
 @app.route('/', methods = ['GET', 'POST'])
 def dashboard():
-    """
-    gifInformation = APIModules.getGif("Troll")
-    if gifInformation == 403:
-        return render_template("dashboard.html", logged_in = False, errorMSG="HTTP 402 FORBIDDEN ERROR")
-    if gifInformation == 404:
-        return render_template("dashboard.html", logged_in = False, errorMSG = "API KEY NOT FOUND")
-    if gifInformation == 405:
-        return render_template("dashboard.html", logged_in = False, errorMSG="INVALID API NAME")
-    """
-
     if request.method == 'POST':
         query = request.form.get("query")
         if query:
@@ -72,10 +62,6 @@ def register():
                 return redirect(url_for('register'))
     return render_template("register.html")
 
-@app.route('/view', methods = ['GET', 'POST'])
-def view():
-    return render_template("view.html")
-
 @app.route('/search/<queryS>', methods = ['GET', 'POST'])
 def search(queryS):
 
@@ -90,6 +76,23 @@ def search(queryS):
         return render_template("search.html", errorMSG="API not accessible. (HTTP 403)")
 
     return render_template("search.html", recipes=foodList, query=queryS)
+
+@app.route('/search/<queryS>/<recipeID>', methods = ['GET', 'POST'])
+def view(queryS, recipeID):
+
+    recipeInformation = APIModules.getRecipeInformation(recipeID)
+
+    recipeGif = APIModules.getGif(recipeInformation[0]["title"])
+
+    if recipeGif == 403:
+        return render_template("view.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
+    if recipeGif == 404:
+        return render_template("view.html", errorMSG = "API KEY NOT FOUND")
+    if recipeGif == 405:
+        return render_template("view.html",  errorMSG="INVALID API NAME")
+    
+
+    return render_template("view.html", recipeInformation=recipeInformation, recipeGif=recipeGif['link'])
 
 @app.route('/create', methods = ['GET', 'POST'])
 def create():

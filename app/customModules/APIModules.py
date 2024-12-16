@@ -200,8 +200,8 @@ def getRecipeInformation(id):
     }
 
     paramString = urlencode(params)
-    url = f"https://api.spoonacular.com/recipes/complexSearch?{paramString}"
-    # print(url)
+    url = f"https://api.spoonacular.com/recipes/{id}/information?{paramString}"
+    print(url)
     headers = {'User-Agent': 'Mozilla/5.0'} 
     request = urllib.request.Request(url, headers=headers)
 
@@ -210,21 +210,31 @@ def getRecipeInformation(id):
             if response.getcode() == 200:
                 data = json.loads(response.read().decode('utf-8'))
 
-                fullList = {
+                fullList = []
+
+                baseInformation = {
                     "title": data["title"],
                     "servings": data["servings"],
-                    "vegetarianStatus": data["vegetarian"],
-                    "veganStatus": data["vegan"],
-                    "glutenFreeStatus": data["glutenFree"],
-                    "dairyFreeStatus": data["dairyFree"],
-                    "veryHealthyStatus": data["veryHealthy"],
-                    "preparationMinutes": data["preparationMinutes"],
-                    "cookingMinutes": data["cookingMinutes"],
                     "readyInMinutes": data["readyInMinutes"],
                     "healthScore": data["healthScore"],
                     "creditsText": data["creditsText"],
-
+                    "dishTypes": data["dishTypes"],
+                    "summary": data["summary"]
                 }
+
+                nutrition = data["nutrition"]["nutrients"]
+                ingredients = data["nutrition"]["ingredients"]
+                breakdown = data["nutrition"]["caloricBreakdown"]
+                steps = data["analyzedInstructions"][0]["steps"]
+                
+
+                fullList.append(baseInformation)
+                fullList.append(nutrition)
+                fullList.append(ingredients)
+                fullList.append(breakdown)
+                print(breakdown)
+                fullList.append(steps)
+
                 return fullList
             else:
                 return "RATE-LIMITED"

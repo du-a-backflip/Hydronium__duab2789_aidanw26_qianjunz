@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #202124; 
+    color: #ffffff; 
+}
+
+.top-bar {
+    background-color: #202124;
+}
+
+.sign_in_btn {
+    padding: 10px 12px;
+    margin: 14px 18px 12px -20px;
+    min-width: 85px;
+}
+
+.nav-right-items {
+    padding: 10px 12px;
+    margin-top: 14px;
+}
+
+.more {
+    width: 40px;
+    height: auto;
+    margin-top: 2px;
+    margin-left: -10px;
+}
+
+.pfp {
+    width: 60px;
+    height: auto;
+    margin-top: 25px;
+    margin-left: -15px;
+    border-radius: 40px;
+}
+
+.pfpInside {
+    width: 100px;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 175px;
+    border-radius: 40px;
+}
+
+.dropdown-menu2 h3 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.logo {
+    margin-top: 10px;
+    width: 200px;
+    height: auto;
+}
+
+/* For the More Button */
+
+input[type="checkbox"] { /* Keeps the checkbox hidden*/
+    display: none;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 14px;
+    margin-left: -100px;
+    margin-right: 10px;
+    right: -40px;
+    border-radius: 20px;
+}
+
+input[type="checkbox"]:checked + label + .dropdown-menu { /* Show dropdown on click*/
+    display: block;
+}
+
+.filter {
+    width: 70px;
+    height: auto;
+    margin-left: -20px;
+    margin-bottom: 20px;
+}
+
+/* For the Profile Button */
+
+.dropdown-menu2 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 14px;
+    border-radius: 20px;
+    right: 10px;
+    width: 500px;
+    height: 350px;
+}
+
+input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on click*/
+    display: block;
+}
+
+.content {
+    background-color: #202124;
+}
+
+/* Error Message */
+p {
+    text-align: center;
+    margin: 20px 0;
+    color: #e74c3c; /* Error color */
+}
+
+/* Results Container */
+.card {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: row;
+    background: #202124;
+    border: 0;
+}
+
+.cardInfo {
+    background-color: #333333; /* Card background */
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px; /* Fixed width for consistency */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cardInfo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.foodpic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.cardInfo p {
+    margin: 0;
+    color: #f1f1f1;
+}
+
