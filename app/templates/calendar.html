@@ -249,13 +249,16 @@ input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on c
         {% if day > 0 %}
         <p>{{day}}</p>
         {% endif %}
-        <p>{{holidays[month][week][day]['name']}}</p>
         <!--
+        <p>{{holidays[month][week][day]['name']}}</p>
+        
         <form action="{{ url_for('holidayRedirect') }}" method="get" target="_blank" style="display:inline;">
           <input type="hidden" name="query" value="{{ day['name'] }} holiday food recipes">
           <button type="submit">View</button>
         </form>
       -->
+
+      <a href= "{{ url_for('calDataName', name = holidays[month][week][day]['name'])}}"> <p>{{holidays[month][week][day]['name']}}</p> </a>
       </th>
       {% endfor %}
     </tr>
@@ -263,8 +266,5 @@ input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on c
   </table>
   <br>
   {% endfor %}
-    <p>Work in Progress
-		<a href = "{{url_for('dashboard')}}"> Go Back to Dashboard </a>
-	  </p>
 </body>
 </html>
