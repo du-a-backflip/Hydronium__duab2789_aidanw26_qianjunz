@@ -19,7 +19,7 @@
 
       <div class="top-bar-right">
         <ul class="menu align-right margin-top-10" style="background-color: #202124;">
-      
+
           <div class="nav-right-items grid-x">
             <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
             <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
@@ -29,7 +29,7 @@
                 <label for="dropdown-toggle">
                   <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
                 </label>
-    
+
                 <div class="dropdown-menu">
                   <ul>
                     <li><a href="#">Create Recipe</a></li>
@@ -40,7 +40,7 @@
               </div>
             </li>
           </div>
-    
+
           {% if logged_in %}
             <div style="position: relative; display: inline-block;">
                 <input type="checkbox" id="dropdown-toggle2">
@@ -53,13 +53,13 @@
                     <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
                     <h3>Hello {{ username }}</h3>
                     <a class="button" href="{{url_for('settings')}}">Manage Account</a>
-                    <hr> 
+                    <hr>
                     <a class="button alert" href="{{url_for('logout')}}">Logout</a>
                 </ul>
                 </div>
             </div>
         {% endif %}
-            
+
         {% if not logged_in %}
             <div class="sign_in_btn">
             <a class="button primary" href="{{url_for('login')}}" style="border-radius: 20px;">Sign In</a>
@@ -69,10 +69,13 @@
       </div>
     </div>
 </nav>
+  {{errorMSG}}
   <div style = "color: white">
     {% for i in data %}
     {% if i['name'] == name %}
     {{name}}
+    <br>
+    <img class="thumbnail" src= "{{ holidayGif }}" alt="GIF unable to Load">
     <br>
     {{i['date']}}
     <br>
