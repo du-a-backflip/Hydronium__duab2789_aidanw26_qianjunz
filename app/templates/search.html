@@ -3,23 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/search.css')}}"/>
     <title>Search</title>
 </head>
 <body>
-  <h1>Search Results</h1>
-  {% if errorMSG %}
-      <p>{{ errorMSG }}</p>
-  {% else %}
-      <h2>Results for "{{ query }}"</h2>
-      <ul>
+    <nav class="navbar">
+        <div class="top-bar">
+          <div class="top-bar-left">
+            <a href="{{url_for('dashboard')}}">
+              <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/y9vv9llgqhhmhp21yl7m" alt="logo" class="logo">
+            </a>
+          </div>
+    
+          <div class="top-bar-right">
+            <ul class="menu align-right margin-top-10" style="background-color: #202124;">
+          
+              <div class="nav-right-items grid-x">
+                <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
+                <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
+                <li>
+                  <div style="position: relative; display: inline-block;">
+                    <input type="checkbox" id="dropdown-toggle">
+                    <label for="dropdown-toggle">
+                      <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
+                    </label>
+        
+                    <div class="dropdown-menu">
+                      <ul>
+                        <li><a href="#">Create Recipe</a></li>
+                        <li><a href="#">Saved Recipes</a></li>
+                        <li><a href="#">About</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </div>
+        
+              {% if logged_in %}
+                <div style="position: relative; display: inline-block;">
+                    <input type="checkbox" id="dropdown-toggle2">
+                    <label for="dropdown-toggle2">
+                    <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
+                    </label>
+
+                    <div class="dropdown-menu2">
+                    <ul>
+                        <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
+                        <h3>Hello {{ username }}</h3>
+                        <a class="button" href="{{url_for('settings')}}">Manage Account</a>
+                        <hr> 
+                        <a class="button alert" href="{{url_for('logout')}}">Logout</a>
+                    </ul>
+                    </div>
+                </div>
+            {% endif %}
+                
+            {% if not logged_in %}
+                <div class="sign_in_btn">
+                <a class="button primary" href="{{url_for('login')}}" style="border-radius: 20px;">Sign In</a>
+                </div>
+            {% endif %}
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="search-container">
+      <form method="POST">
+        <div class="grid-x grid-padding-x align-center">
+          <div class="cell medium-4">
+            <input class="input-group-field" type="text" name="query" value="{{query}}" autocomplete="off" style="border-radius: 20px; height: 50px;" required>
+          </div>
+          <div class="cell shrink">
+            <div style="position: relative; display: inline-block;">
+              <input type="checkbox" id="dropdown-toggle3">
+              <label for="dropdown-toggle3">
+                <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/q7vj16hmpmbmydtcu3wd" alt="filter" class="filter">
+              </label>
+          
+              <div class="dropdown-menu3">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="content">
+      {% if errorMSG %}
+        <p>{{ errorMSG }}</p>
+      {% else %}
+      <ul class="card">
           {% for recipe in recipes %}
-              <li>
-                  <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="width:100px;height:100px;">
-                  <p>{{ recipe.title }}</p>
-              </li>
+          <li class="cardInfo">
+            <a href="#" style="text-decoration: none;">
+              <img class="foodpic" src="{{ recipe.image }}" alt="Image not Available">
+              <p>{{ recipe.title }}</p>
+            </a>
+              
+          </li>
           {% endfor %}
       </ul>
-  {% endif %}
-  <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+      {% endif %}
+  </div>
 </body>
 </html>
