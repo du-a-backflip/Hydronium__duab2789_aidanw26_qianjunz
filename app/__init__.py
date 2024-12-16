@@ -67,14 +67,14 @@ def search(queryS):
 
     if not queryS:
         return render_template("search.html", errorMSG="No search query provided.")
-    
+
     foodList = APIModules.getRecipes(queryS)
 
     if foodList == "RATE-LIMITED":
         return render_template("search.html", errorMSG="API rate limit reached.")
     if foodList == 403:
         return render_template("search.html", errorMSG="API not accessible. (HTTP 403)")
-    
+
     if request.method == 'POST':
         query = request.form.get("query")
         if query:
@@ -95,7 +95,7 @@ def view(queryS, recipeID):
         return render_template("view.html", errorMSG = "API KEY NOT FOUND")
     if recipeGif == 405:
         return render_template("view.html",  errorMSG="INVALID API NAME")
-    
+
 
     return render_template("view.html", recipeInformation=recipeInformation, recipeGif=recipeGif['link'])
 
@@ -120,12 +120,10 @@ def calDataName(name):
         return render_template("calendar.html", errorMSG = "API KEY NOT FOUND")
     if data == 405:
         return render_template("calendar.html", errorMSG="INVALID API NAME")
-    
-    logged_in = False
 
     if 'username' in session:
         return render_template("calData.html", name = name, data=data, logged_in=True, username = session['username'])
-    
+
 
     return render_template("calData.html", name = name, data=data, logged_in=False)
 
@@ -168,7 +166,7 @@ def calendar():
     #print(actualDates)
     if 'username' in session:
         return render_template("calendar.html", holidays=actualDates, logged_in=True, username = session['username'])
-    
+
     return render_template("calendar.html", holidays=actualDates, logged_in=False)
 
 @app.route('/hrecipes', methods = ['GET', 'POST'])
@@ -198,7 +196,7 @@ def settings():
                 username = session['username']
 
         print(current_password)
-        
+
         if new_password:
             if new_password != confirm_password:
                 errormsgs.append("New passwords do not match")
@@ -209,8 +207,8 @@ def settings():
 
         if errormsgs:
             return render_template("settings.html", logged_in=True, username=session['username'], errorMsg = "; ".join(errormsgs))
-    
-    return render_template("settings.html", logged_in=True, username=session['username'])   
+
+    return render_template("settings.html", logged_in=True, username=session['username'])
 
 @app.route('/logout')
 def logout():
