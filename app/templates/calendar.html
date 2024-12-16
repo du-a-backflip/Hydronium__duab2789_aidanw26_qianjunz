@@ -3,18 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dashboard.css')}}"/>
+    <title>Calendar</title>
+    <style>
+     body {
+    background-color: #202124;
+}
+
+.top-bar {
+    background-color: #202124;
+}
+
+.nav-right-items {
+    padding: 10px 12px;
+    margin-top: 14px;
+}
+
+.more {
+    width: 40px;
+    height: auto;
+    margin-top: 2px;
+    margin-left: -10px;
+}
+
+.pfp {
+    width: 60px;
+    height: auto;
+    margin-top: 25px;
+    margin-left: -15px;
+    border-radius: 40px;
+}
+
+.pfpInside {
+    width: 100px;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 175px;
+    border-radius: 40px;
+}
+
+.dropdown-menu2 h3 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.logo {
+    margin-top: 10px;
+    width: 200px;
+    height: auto;
+}
+
+/* For the More Button */
+
+input[type="checkbox"] { /* Keeps the checkbox hidden*/
+    display: none;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 14px;
+    margin-left: -100px;
+    margin-right: 10px;
+    right: -40px;
+    border-radius: 20px;
+}
+
+input[type="checkbox"]:checked + label + .dropdown-menu { /* Show dropdown on click*/
+    display: block;
+}
+
+/* For the Profile Button */
+
+.dropdown-menu2 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 14px;
+    border-radius: 20px;
+    right: 10px;
+    width: 500px;
+    height: 350px;
+}
+
+input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on click*/
+    display: block;
+}
+    </style>
 </head>
 <body>
-    <h1>Calendar</h1>
-	<nav>
-		<a href = "{{url_for('dashboard')}}">Dashboard</a>
-		<a href = "{{url_for('calendar')}}">Calendar</a>
-    {% if logged_in %}
-      <a href = "{{url_for('settings')}}">Settings</a>
-      <a href = "{{url_for('create')}}">Create New Recipe</a>
-    {% endif %}
-	</nav>
+  ```
+  <nav class="navbar">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <a href="{{url_for('dashboard')}}">
+            <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/y9vv9llgqhhmhp21yl7m" alt="logo" class="logo">
+          </a>
+        </div>
+  
+        <div class="top-bar-right">
+          <ul class="menu align-right margin-top-10" style="background-color: #202124;">
+        
+            <div class="nav-right-items grid-x">
+              <li><a href = "{{url_for('calendar')}}" style="color: white">Calendar</a></li>
+              <li><a href = "{{url_for('calendar')}}" style="color: white">Community</a></li>
+              <li>
+                <div style="position: relative; display: inline-block;">
+                  <input type="checkbox" id="dropdown-toggle">
+                  <label for="dropdown-toggle">
+                    <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/seuphedexublabnuzy3x" alt="more" class="more">
+                  </label>
+      
+                  <div class="dropdown-menu">
+                    <ul>
+                      <li><a href="#">Create Recipe</a></li>
+                      <li><a href="#">Saved Recipes</a></li>
+                      <li><a href="#">About</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </div>
+      
+            {% if logged_in %}
+            <div style="position: relative; display: inline-block;">
+              <input type="checkbox" id="dropdown-toggle2">
+              <label for="dropdown-toggle2">
+                <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfp" class="pfp">
+              </label>
+      
+              <div class="dropdown-menu2">
+                <ul>
+                  <img src="https://res.cloudinary.com/dd8qeiddj/image/upload/f_auto,q_auto/jor4nu520m4k7xf9z1v1" alt="pfpInside" class="pfpInside">
+                  <h3>Hello {{ username }}</h3>
+                  <a class="button" href="{{url_for('settings')}}">Manage Account</a>
+                  <hr> 
+                  <a class="button alert" href="{{url_for('logout')}}">Logout</a>
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+  </nav>
   <p>{{ errorMSG }}</p>
   <!--
   <ul>
@@ -33,39 +169,98 @@
   </ul>
 -->
   {% for month in holidays %}
+  {% if month == 1 %}
+  <h1 style = "text-align: center; color: white;">
+    January
+  </h1>
+  {% endif %}
+  {% if month == 2 %}
+  <h1 style = "text-align: center; color: white;">
+    February
+  </h1>
+  {% endif %}
+  {% if month == 3 %}
+  <h1 style = "text-align: center; color: white;">
+    March
+  </h1>
+  {% endif %}
+  {% if month == 4 %}
+  <h1 style = "text-align: center; color: white;">
+    April
+  </h1>
+  {% endif %}
+  {% if month == 5 %}
+  <h1 style = "text-align: center; color: white;">
+    May
+  </h1>
+  {% endif %}
+  {% if month == 6 %}
+  <h1 style = "text-align: center; color: white;">
+    June
+  </h1>
+  {% endif %}
+  {% if month == 7 %}
+  <h1 style = "text-align: center; color: white;">
+    July
+  </h1>
+  {% endif %}
+  {% if month == 8 %}
+  <h1 style = "text-align: center; color: white;">
+    August
+  </h1>
+  {% endif %}
+  {% if month == 9 %}
+  <h1 style = "text-align: center; color: white;">
+    September
+  </h1>
+  {% endif %}
+  {% if month == 10 %}
+  <h1 style = "text-align: center; color: white;">
+    October
+  </h1>
+  {% endif %}
+  {% if month == 11 %}
+  <h1 style = "text-align: center; color: white;">
+    November
+  </h1>
+  {% endif %}
+  {% if month == 12 %}
+  <h1 style = "text-align: center; color: white;">
+    December
+  </h1>
+  {% endif %}
   <table>
     <tr>
-      <th>Sunday</th>
       <th>Monday</th>
       <th>Tuesday</th>
       <th>Wednesday</th>
       <th>Thursday</th>
       <th>Friday</th>
       <th>Saturday</th>
+      <th>Sunday</th>
     </tr>
     {% for week in holidays[month] %}
     <tr>
       {% for day in holidays[month][week] %}
       <th>
         {% if day <= 0 %}
-        <p>filler</p>
+        <p> </p>
         {% endif %}
         {% if day > 0 %}
         <p>{{day}}</p>
         {% endif %}
-        <p>{{holidays[month][week][day]}}</p>
+        <p>{{holidays[month][week][day]['name']}}</p>
+        <!--
         <form action="{{ url_for('holidayRedirect') }}" method="get" target="_blank" style="display:inline;">
           <input type="hidden" name="query" value="{{ day['name'] }} holiday food recipes">
           <button type="submit">View</button>
         </form>
+      -->
       </th>
       {% endfor %}
     </tr>
     {% endfor %}
   </table>
-  <br>
-  <br>
-  <br>
   <br>
   {% endfor %}
     <p>Work in Progress
