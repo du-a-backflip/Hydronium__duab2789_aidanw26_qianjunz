@@ -1,0 +1,103 @@
+body {
+    background-color: #202124;
+}
+
+.nav-right-items {
+    padding: 10px 12px;
+    margin-top: 14px;
+}
+
+.more {
+    width: 40px;
+    height: auto;
+    margin-top: 2px;
+    margin-left: -10px;
+}
+
+.pfp {
+    width: 60px;
+    height: auto;
+    margin-top: 25px;
+    margin-left: -15px;
+    border-radius: 40px;
+}
+
+.pfpInside {
+    width: 100px;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 175px;
+    border-radius: 40px;
+}
+
+.dropdown-menu2 h3 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.grid-container {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-container {
+    width: 500px;;
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.alert-flash {
+    color: white;
+    background-color: green; 
+    border: 3px solid greenyellow; 
+    padding: 15px;
+    margin: 20px auto; 
+    border-radius: 8px; 
+    text-align: center; 
+    width: 50%; 
+    font-weight: bold;
+
+}
+
+/* For the More Button */
+
+input[type="checkbox"] { /* Keeps the checkbox hidden*/
+    display: none;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 14px;
+    margin-left: -100px;
+    margin-right: 10px;
+    right: -40px;
+    border-radius: 20px;
+}
+
+input[type="checkbox"]:checked + label + .dropdown-menu { /* Show dropdown on click*/
+    display: block;
+}
+
+/* For the Profile Button */
+
+.dropdown-menu2 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 14px;
+    border-radius: 20px;
+    right: 10px;
+    width: 500px;
+    height: 350px;
+}
+
+input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on click*/
+    display: block;
+}
