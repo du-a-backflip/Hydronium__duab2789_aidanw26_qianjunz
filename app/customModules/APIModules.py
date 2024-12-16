@@ -82,7 +82,8 @@ def getGif(tag):
     
     params = {
         "api_key": APIKEY,
-        "tag": tag
+        "tag": tag,
+        "number": 30
     }
 
     paramString = urlencode(params)
@@ -149,9 +150,14 @@ def getRecipes(query):
     if APIKEY == "INVALID API NAME":
         return 405
     
+    ingredients = "+".join(query.split())  # Convert spaces to '+'
+    ingredients_param = ingredients.replace("+", ",+")  # Add ',+' between words
+    
     params = {
         "apiKey": APIKEY,
-        "query": query
+        "query": query,
+        "includeIngredients": ingredients_param,
+        "number": 100
     }
 
     paramString = urlencode(params)
