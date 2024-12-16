@@ -74,6 +74,11 @@ def search(queryS):
         return render_template("search.html", errorMSG="API rate limit reached.")
     if foodList == 403:
         return render_template("search.html", errorMSG="API not accessible. (HTTP 403)")
+    
+    if request.method == 'POST':
+        query = request.form.get("query")
+        if query:
+            return redirect(url_for('search', queryS=query))
 
     return render_template("search.html", recipes=foodList, query=queryS)
 
