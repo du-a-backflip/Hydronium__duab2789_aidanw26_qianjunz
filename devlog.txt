@@ -99,7 +99,7 @@ aidanW -- 2024-12-14 10:50
     - Created view button for individual holidays that lead to a recipe page taken from the internet
 * Created search bar that searches spoonacular for recipes in dashboard
 
-aidanW -- 2024-12-15 3:08
+aidanW -- 2024-12-15 15:08
 * Changed look of dashboard/landing page
 
 aidanW -- 2024-12-15 11:07
