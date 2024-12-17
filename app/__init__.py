@@ -26,8 +26,16 @@ DBModules.initDB()
 def dashboard():
     if request.method == 'POST':
         query = request.form.get("query")
+        minCarbs = request.form.get("minCarbs", type=int, default=0)
+        maxCarbs = request.form.get("maxCarbs", type=int, default=100000)
+        minProtein = request.form.get("minProtein", type=int, default=0)
+        maxProtein = request.form.get("maxProtein", type=int, default=100000)
+        minCalories = request.form.get("minCalories", type=int, default=0)
+        maxCalories = request.form.get("maxCalories", type=int, default=100000)
+        minFat = request.form.get("minFat", type=int, default=0)
+        maxFat = request.form.get("maxFat", type=int, default=100000)
         if query:
-            return redirect(url_for('search', queryS=query))
+            return redirect(url_for('search', queryS=query, minCarbs=minCarbs, maxCarbs=maxCarbs,minProtein=minProtein, maxProtein=maxProtein,minCalories=minCalories, maxCalories=maxCalories,minFat=minFat, maxFat=maxFat))
 
     if 'username' in session:
         return render_template("dashboard.html", logged_in = True, username = session['username'])
@@ -67,8 +75,30 @@ def search(queryS):
 
     if not queryS:
         return render_template("search.html", errorMSG="No search query provided.")
+    
+    minCarbs = request.args.get("minCarbs", 0, type=int)
+    maxCarbs = request.args.get("maxCarbs", 100000, type=int)
+    minProtein = request.args.get("minProtein", 0, type=int)
+    maxProtein = request.args.get("maxProtein", 100000, type=int)
+    minCalories = request.args.get("minCalories", 0, type=int)
+    maxCalories = request.args.get("maxCalories", 100000, type=int)
+    minFat = request.args.get("minFat", 0, type=int)
+    maxFat = request.args.get("maxFat", 100000, type=int)
 
-    foodList = APIModules.getRecipes(queryS)
+    if request.method == 'POST':
+        query = request.form.get("query")
+        minCarbs = request.form.get("minCarbs", type=int, default=0)
+        maxCarbs = request.form.get("maxCarbs", type=int, default=100000)
+        minProtein = request.form.get("minProtein", type=int, default=0)
+        maxProtein = request.form.get("maxProtein", type=int, default=100000)
+        minCalories = request.form.get("minCalories", type=int, default=0)
+        maxCalories = request.form.get("maxCalories", type=int, default=100000)
+        minFat = request.form.get("minFat", type=int, default=0)
+        maxFat = request.form.get("maxFat", type=int, default=100000)
+        if query:
+            return redirect(url_for('search', queryS=query, minCarbs=minCarbs, maxCarbs=maxCarbs,minProtein=minProtein, maxProtein=maxProtein,minCalories=minCalories, maxCalories=maxCalories,minFat=minFat, maxFat=maxFat))
+
+    foodList = APIModules.getRecipes(queryS, minCarbs=minCarbs, maxCarbs=maxCarbs, minProtein=minProtein, maxProtein=maxProtein, minCalories=minCalories, maxCalories=maxCalories, minFat=minFat, maxFat=maxFat)
 
     if foodList == "RATE-LIMITED":
         return render_template("search.html", errorMSG="API rate limit reached.")
@@ -78,7 +108,7 @@ def search(queryS):
     if request.method == 'POST':
         query = request.form.get("query")
         if query:
-            return redirect(url_for('search', queryS=query))
+            return redirect(url_for('search', queryS=query, minCarbs=minCarbs, maxCarbs=maxCarbs, minProtein=minProtein, maxProtein=maxProtein, minCalories=minCalories, maxCalories=maxCalories, minFat=minFat, maxFat=maxFat))
 
     return render_template("search.html", recipes=foodList, query=queryS)
 

@@ -79,21 +79,62 @@
             </label>
         
             <div class="dropdown-menu3">
-              
+              <div class="filter-container">
+
+                <div class="filter-item">
+                  <label for="minCarbs">Min Carbs</label>
+                  <input type="number" name="minCarbs" id="minCarbs" min="0" step="1" max="100000" value="0">
+                  <span class="unit">g</span>
+                </div>
+                <div class="filter-item">
+                  <label for="minCalories">Min Calories</label>
+                  <input type="number" name="minCalories" id="minCalories" min="0" max="100000" step="1" value="0">
+                  <span class="unit">kcal</span>
+                </div>
+                
+                <div class="filter-item">
+                  <label for="minProtein">Min Protein</label>
+                  <input type="number" name="minProtein" id="minProtein" min="0" step="1" max="100000" value="0">
+                  <span class="unit">g</span>
+                </div>
+                <div class="filter-item">
+                  <label for="minFat">Min Fat</label>
+                  <input type="number" name="minFat" id="minFat" min="0" step="1" max="100000" value="0">
+                  <span class="unit">g</span>
+                </div>
+          
+                <div class="filter-item">
+                  <label for="maxCarbs">Max Carbs</label>
+                  <input type="number" name="maxCarbs" id="maxCarbs" min="0" step="1" max="100000" value="100000">
+                  <span class="unit">g</span>
+                </div>
+                <div class="filter-item">
+                  <label for="maxCalories">Max Calories</label>
+                  <input type="number" name="maxCalories" id="maxCalories" min="0" step="10" max="100000" value="100000">
+                  <span class="unit">kcal</span>
+                </div>
+          
+                <div class="filter-item">
+                  <label for="maxProtein">Max Protein</label>
+                  <input type="number" name="maxProtein" id="maxProtein" min="0" step="1" max="100000" value="100000">
+                  <span class="unit">g</span>
+                </div>
+                
+                <div class="filter-item">
+                  <label for="maxFat">Max Fat</label>
+                  <input type="number" name="maxFat" id="maxFat" min="0" step="1" max="100000" value="100000">
+                  <span class="unit">g</span>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="cell shrink">
+          <button type="submit" class="button primary" style="display: none;">Search</button>
         </div>
       </div>
     </form>
   </div>
-
-  <!-- Imports JQuery and Foundation JS from CDN to enable scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
-  <!--Necessary line to use CSS and scripts-->
-  <script>
-    $(document).foundation();
-  </script>
 
 </body>
 </html>
