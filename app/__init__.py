@@ -6,17 +6,17 @@ P01: ArRESTedDevelopment
 Time Spent: 2
 """
 
-from dataclasses import dataclass
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 import os
-import calendar
 import datetime
+from customModules import APIModules, DBModules
 
+"""
 calendarDates = {}
 for i in range(1,13):
     calendarDates[i]=calendar.monthcalendar(2024,i)
-from customModules import APIModules, DBModules
+"""
 
 app = Flask(__name__)
 
@@ -174,23 +174,12 @@ def Calendar():
     if data == 405:
         return render_template("calendar.html", errorMSG="INVALID API NAME")
 
-    cal = fullCalendar(year, month, data)
-    print(cal)
+    cal = APIModules.fullCalendar(year, month, data)
+    # print(cal)
+    if 'username' in session:
+        return render_template("calendar.html", calen = cal, month = month, year = year, logged_in = True, username = session['username'])
     return render_template("calendar.html", calen = cal, month = month, year = year)
 
-def fullCalendar(year, month, data):
-    cal = calendar.monthcalendar(year, month)
-    for i in range(len(cal)):
-        for j in range(len(cal[i])):
-            cal[i][j] = [cal[i][j]]
-            for k in range(len(data)):
-                holidate = data[k]['date'].split("-")
-                #print(cal[i][j])
-                if (int(holidate[1]) == month and int(holidate[2][:2]) == cal[i][j][0]):
-                    if (data[k]['name'] not in cal[i][j]):
-                        cal[i][j].append(data[k])
-                        #print(cal[i][j])
-    return cal
     '''
     countneg = -1
     actualDates = {}
@@ -227,7 +216,7 @@ def fullCalendar(year, month, data):
 
 @app.route('/calData/<name>', methods = ['GET', 'POST'])
 def calDataName(name):
-    print(year)
+    # print(year)
     data = APIModules.getHolidays(str(year))
     if data == 403:
         return render_template("calData.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
@@ -273,7 +262,7 @@ def settings():
                 session['username'] = new_username
                 username = session['username']
 
-        print(current_password)
+        # print(current_password)
 
         if new_password:
             if new_password != confirm_password:

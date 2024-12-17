@@ -1,5 +1,6 @@
 import urllib.request, json
 from urllib.parse import urlencode
+import calendar
 
 def getKey(apiName):
     if apiName == "calendarific":
@@ -251,3 +252,18 @@ def getRecipeInformation(id):
         print(f"Exception occurred: {e}")
         return 403
 
+############################# Calendar #############################
+
+def fullCalendar(year, month, data):
+    cal = calendar.monthcalendar(year, month)
+    for i in range(len(cal)):
+        for j in range(len(cal[i])):
+            cal[i][j] = [cal[i][j]]
+            for k in range(len(data)):
+                holidate = data[k]['date'].split("-")
+                #print(cal[i][j])
+                if (int(holidate[1]) == month and int(holidate[2][:2]) == cal[i][j][0]):
+                    if (data[k]['name'] not in cal[i][j]):
+                        cal[i][j].append(data[k])
+                        #print(cal[i][j])
+    return cal

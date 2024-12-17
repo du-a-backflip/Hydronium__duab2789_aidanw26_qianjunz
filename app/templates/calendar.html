@@ -4,99 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dashboard.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/calendar.css')}}"/>
     <title>Calendar</title>
-    <style>
-     body {
-    background-color: #202124;
-}
-
-.top-bar {
-    background-color: #202124;
-}
-
-.nav-right-items {
-    padding: 10px 12px;
-    margin-top: 14px;
-}
-
-.more {
-    width: 40px;
-    height: auto;
-    margin-top: 2px;
-    margin-left: -10px;
-}
-
-.pfp {
-    width: 60px;
-    height: auto;
-    margin-top: 25px;
-    margin-left: -15px;
-    border-radius: 40px;
-}
-
-.pfpInside {
-    width: 100px;
-    height: auto;
-    margin-top: 25px;
-    margin-left: 175px;
-    border-radius: 40px;
-}
-
-.dropdown-menu2 h3 {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.logo {
-    margin-top: 10px;
-    width: 200px;
-    height: auto;
-}
-
-/* For the More Button */
-
-input[type="checkbox"] { /* Keeps the checkbox hidden*/
-    display: none;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    padding: 10px;
-    margin-top: 14px;
-    margin-left: -100px;
-    margin-right: 10px;
-    right: -40px;
-    border-radius: 20px;
-}
-
-input[type="checkbox"]:checked + label + .dropdown-menu { /* Show dropdown on click*/
-    display: block;
-}
-
-/* For the Profile Button */
-
-.dropdown-menu2 {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    padding: 10px;
-    margin-top: 14px;
-    border-radius: 20px;
-    right: 10px;
-    width: 500px;
-    height: 350px;
-}
-
-input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on click*/
-    display: block;
-}
-    </style>
 </head>
 <body>
-  ```
   <nav class="navbar">
       <div class="top-bar">
         <div class="top-bar-left">
@@ -147,11 +58,61 @@ input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on c
               </div>
             </div>
             {% endif %}
+
+            {% if not logged_in %}
+            <div class="sign_in_btn">
+            <a class="button primary" href="{{url_for('login')}}" style="border-radius: 20px;">Sign In</a>
+            </div>
+            {% endif %}
           </ul>
         </div>
       </div>
   </nav>
   <p>{{ errorMSG }}</p>
+  <hr class="top">
+  <div class="grid-container">
+    <form method="POST" action="/calendar" class="callout">
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="month" style="color: white;">Month</label>
+          <select name="month" id="month" class="custom-select">
+            <option value="00">--Select A Month--</option>
+            <option value="01">January</option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+        
+        <div class="cell small-12 medium-6">
+          <label for="year" style="color: white;">Year</label>
+          <select name="year" id="year" class="custom-select">
+            <option value="00">--Select A Year--</option>
+            {% for i in range (0, 10) %}
+            <option value="{{2020+i}}">{{2020+i}}</option>
+            {% endfor %}
+          </select>
+        </div>
+  
+        
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 text-center">
+          <button type="submit" class="button primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <hr class="bottom">
   <!--
   <ul>
     {% for holiday in holidays %}
@@ -253,31 +214,5 @@ input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on c
     </tr>
     {% endfor %}
     </table>
-  <form method="POST" action="/calendar">
-    <label for="dropdown" style="color: white">Year</label>
-    <select name="year" id="year">
-      <option value="00">--Select A Year--</option>
-      {% for i in range (0, 10) %}
-      <option value = {{2020+i}}>{{2020+i}}</option>
-      {% endfor %}
-    </select>
-    <label for="dropdown" style="color: white">Month</label>
-    <select name="month" id="month">
-      <option value="00">--Select A Month--</option>
-      <option value="01">January</option>
-      <option value="02">February</option>
-      <option value="03">March</option>
-      <option value="04">April</option>
-      <option value="05">May</option>
-      <option value="06">June</option>
-      <option value="07">July</option>
-      <option value="08">August</option>
-      <option value="09">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-    </select>
-    <input type="submit" value="Submit">
-</form>
 </body>
 </html>
