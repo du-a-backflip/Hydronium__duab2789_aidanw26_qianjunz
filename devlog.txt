@@ -127,6 +127,9 @@ aidanW -- 2024-12-15 11:07
 qianjunZ -- 2024-12-15 11:58
 * Updated the nav bar and styled all of calendar
 
+duaB -- 2024-12-16 9:30
+* Rewrote calendar function and html page so that user can choose a date and year from a form instead of rendering entire year
+
 qianjunZ -- 2024-12-16 10:50
 * Added gifs to calData
 
@@ -134,9 +137,15 @@ aidanW -- 2024-12-16 10:58
 * Expanded search filters in APIModules
 * Added styling to dashboard
 
+duaB --2024-12-16 11:01
+* Worked on styling calData
+
 qianjunZ -- 2024-12-16 20:40
 * Updated the design doc to latest version
 
 aidanW -- 2024-12-16 20:50
 * Completed every remaining function -- Calendar, styling for individual calendar and recipe pages, fixed filtering for related pages
 * Uploaded Design Doc V2
+
+duaB -- 2024-12-16 21:30
+* Rewrote some of calData to work with updated Calendar
