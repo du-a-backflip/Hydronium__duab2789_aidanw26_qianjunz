@@ -11,6 +11,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import sqlite3
 import os
 import calendar
+import datetime
+
 calendarDates = {}
 for i in range(1,13):
     calendarDates[i]=calendar.monthcalendar(2024,i)
@@ -136,10 +138,11 @@ def calDataName(name):
 
     return render_template("calData.html", name = name, data=data, logged_in=False, holidayGif = holidayGif["link"])
 
-@app.route('/calendar', methods = ['GET', 'POST'])
-def calendar():
 
+@app.route('/calendar', methods = ['GET', 'POST'])
+def Calendar():
     data = APIModules.getHolidays("2024")
+    currDate = datetime.datetime.now()
 
     if data == 403:
         return render_template("calendar.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
@@ -147,8 +150,40 @@ def calendar():
         return render_template("calendar.html", errorMSG = "API KEY NOT FOUND")
     if data == 405:
         return render_template("calendar.html", errorMSG="INVALID API NAME")
+    
+    if request.method == 'POST':
+        month = int(request.form.get('month'))
+        year = int(request.form.get('year'))
+        print(year)
+        if month > 0 and year > 0:
+            cal = fullCalendar(year, month, data)
+        else:
+            if month == 0:
+                month = currDate.month
+            if year == 0:
+                year = currDate.year
+            cal = fullCalendar(year, month, data)
+    else:
+        month = currDate.month 
+        year = currDate.year
+        cal = fullCalendar(currDate.year, currDate.month, data)
+        print(cal)
+    return render_template("calendar.html", calen = cal, month = month, year = year)
 
-
+def fullCalendar(year, month, data):
+    cal = calendar.monthcalendar(year, month)
+    for i in range(len(cal)):
+        for j in range(len(cal[i])):
+            cal[i][j] = [cal[i][j]]
+            for k in range(len(data)):
+                holidate = data[k]['date'].split("-")
+                #print(cal[i][j])
+                if (int(holidate[1]) == month and int(holidate[2][:2]) == cal[i][j][0]):
+                    if (data[k]['name'] not in cal[i][j]):
+                        cal[i][j].append(data[k]['name'])
+                        #print(cal[i][j])
+    return cal
+    '''
     countneg = -1
     actualDates = {}
     for i in calendarDates:
@@ -172,11 +207,16 @@ def calendar():
             for j in actualDates[int(monthOf)][k]:
                 if (j == int(findValue[3:])):
                     actualDates[int(monthOf)][k][j]=data[i]
-    #print(actualDates)
+    
+    print(actualDates)
+    
+
     if 'username' in session:
         return render_template("calendar.html", holidays=actualDates, logged_in=True, username = session['username'])
 
     return render_template("calendar.html", holidays=actualDates, logged_in=False)
+    '''
+
 
 @app.route('/hrecipes', methods = ['GET', 'POST'])
 def hrecipes():
