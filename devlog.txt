@@ -91,25 +91,51 @@ aidanW -- 2024-12-11 11:01
 * Completed search api function
 * Added default profile picture to dashboard
 
-aidanW -- 2024-12-11 11:00
+qianjunZ -- 2024-12-11 11:01
+* Added the requirements to code that you need to be logged in for
+
+aidanW -- 2024-12-11 12:00
 * Started work on Spoonacular recipe retrieval function
+
+qianjunz -- 2024-12-14 10:52
+* Added more requirements to the code
 
 aidanW -- 2024-12-14 10:50
 * Filtered out duplicate holidays in calendar
     - Created view button for individual holidays that lead to a recipe page taken from the internet
 * Created search bar that searches spoonacular for recipes in dashboard
 
-aidanW -- 2024-12-15 15:08
+qianjunZ -- 2024-12-15 11:50
+* Changed the look of dashboard, started the google idea
+
+aidanW -- 2024-12-15 3:08
 * Changed look of dashboard/landing page
+
+qianjunZ -- 2024-12-15 6:10
+* Completed all of calendar
+	- Made the calendar render correctly
+	- Added the links to calendar
+	- Made the new page for calData
+* Completed all of calData
+	- jinja for calData
 
 aidanW -- 2024-12-15 11:07
 * Implemented and styled Login page, registration page, settings page, search results page
 * Updated navbar to have clickable logo that brings you to home page/dashboard
 * Added nonfunctional filter button next to search bar
 
+qianjunZ -- 2024-12-15 11:58
+* Updated the nav bar and styled all of calendar
+
+qianjunZ -- 2024-12-16 10:50
+* Added gifs to calData
+
 aidanW -- 2024-12-16 10:58
 * Expanded search filters in APIModules
 * Added styling to dashboard
+
+qianjunZ -- 2024-12-16 20:40
+* Updated the design doc to latest version
 
 aidanW -- 2024-12-16 20:50
 * Completed every remaining function -- Calendar, styling for individual calendar and recipe pages, fixed filtering for related pages
