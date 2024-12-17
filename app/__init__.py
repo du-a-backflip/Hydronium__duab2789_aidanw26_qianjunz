@@ -11,6 +11,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import sqlite3
 import os
 import calendar
+import datetime
+
 calendarDates = {}
 for i in range(1,13):
     calendarDates[i]=calendar.monthcalendar(2024,i)
@@ -133,36 +135,38 @@ def view(queryS, recipeID):
         return render_template("view.html", recipeInformation=recipeInformation, recipeGif=recipeGif['link'], logged_in=True, username=session['username'])
     return render_template("view.html", recipeInformation=recipeInformation, recipeGif=recipeGif['link'])
 
-@app.route('/calData/<name>', methods = ['GET', 'POST'])
-def calDataName(name):
-    data = APIModules.getHolidays("2024")
-    if data == 403:
-        return render_template("calData.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
-    if data == 404:
-        return render_template("calData.html", errorMSG = "API KEY NOT FOUND")
-    if data == 405:
-        return render_template("calData.html", errorMSG="INVALID API NAME")
-
-    holidayGif = APIModules.getGif(name)
-
-    if holidayGif == 403:
-        return render_template("calData.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
-    if holidayGif == 404:
-        return render_template("calData.html", errorMSG = "API KEY NOT FOUND")
-    if holidayGif == 405:
-        return render_template("calData.html",  errorMSG="INVALID API NAME")
-
+@app.route('/create', methods = ['GET', 'POST'])
+def create():
     if 'username' in session:
-        return render_template("calData.html", name = name, data=data, logged_in=True, username = session['username'], holidayGif = holidayGif["link"])
+        return render_template("create.html")
+    return redirect(url_for('dashboard'))
+
+@app.route('/edit', methods = ['GET', 'POST'])
+def edit():
+    if 'username' in session:
+        return render_template("edit.html")
+    return redirect(url_for('dashboard'))
 
 
-    return render_template("calData.html", name = name, data=data, logged_in=False, holidayGif = holidayGif["link"])
+currDate = datetime.datetime.now()
+month = currDate.month
+year = currDate.year
 
 @app.route('/calendar', methods = ['GET', 'POST'])
-def calendar():
+def Calendar():
+    if request.method == 'POST':
+        month = int(request.form.get('month'))
+        year = int(request.form.get('year'))
+        if month == 0 or year == 0:
+            if month == 0:
+                month = currDate.month
+            if year == 0:
+                year = currDate.year
+    else:
+        month = currDate.month 
+        year = currDate.year
 
-    data = APIModules.getHolidays("2024")
-
+    data = APIModules.getHolidays(str(year))
     if data == 403:
         return render_template("calendar.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
     if data == 404:
@@ -170,7 +174,24 @@ def calendar():
     if data == 405:
         return render_template("calendar.html", errorMSG="INVALID API NAME")
 
+    cal = fullCalendar(year, month, data)
+    print(cal)
+    return render_template("calendar.html", calen = cal, month = month, year = year)
 
+def fullCalendar(year, month, data):
+    cal = calendar.monthcalendar(year, month)
+    for i in range(len(cal)):
+        for j in range(len(cal[i])):
+            cal[i][j] = [cal[i][j]]
+            for k in range(len(data)):
+                holidate = data[k]['date'].split("-")
+                #print(cal[i][j])
+                if (int(holidate[1]) == month and int(holidate[2][:2]) == cal[i][j][0]):
+                    if (data[k]['name'] not in cal[i][j]):
+                        cal[i][j].append(data[k])
+                        #print(cal[i][j])
+    return cal
+    '''
     countneg = -1
     actualDates = {}
     for i in calendarDates:
@@ -194,11 +215,41 @@ def calendar():
             for j in actualDates[int(monthOf)][k]:
                 if (j == int(findValue[3:])):
                     actualDates[int(monthOf)][k][j]=data[i]
-    #print(actualDates)
+    
+    print(actualDates)
+    
+
     if 'username' in session:
         return render_template("calendar.html", holidays=actualDates, logged_in=True, username = session['username'])
 
     return render_template("calendar.html", holidays=actualDates, logged_in=False)
+    '''
+
+@app.route('/calData/<name>', methods = ['GET', 'POST'])
+def calDataName(name):
+    print(year)
+    data = APIModules.getHolidays(str(year))
+    if data == 403:
+        return render_template("calData.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
+    if data == 404:
+        return render_template("calData.html", errorMSG = "API KEY NOT FOUND")
+    if data == 405:
+        return render_template("calData.html", errorMSG="INVALID API NAME")
+
+    holidayGif = APIModules.getGif(name)
+
+    if holidayGif == 403:
+        return render_template("calData.html", errorMSG="HTTP 402 FORBIDDEN ERROR")
+    if holidayGif == 404:
+        return render_template("calData.html", errorMSG = "API KEY NOT FOUND")
+    if holidayGif == 405:
+        return render_template("calData.html",  errorMSG="INVALID API NAME")
+
+    if 'username' in session:
+        return render_template("calData.html", name = name, data=data, logged_in=True, username = session['username'], holidayGif = holidayGif["link"])
+
+
+    return render_template("calData.html", name = name, data=data, logged_in=False, holidayGif = holidayGif["link"])
 
 @app.route('/settings', methods = ['GET', 'POST'])
 def settings():
