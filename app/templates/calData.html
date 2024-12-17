@@ -69,26 +69,31 @@
       </div>
     </div>
 </nav>
-  {{errorMSG}}
-  <div style = "color: white">
+
+{{errorMSG}}
+
+<div class="grid-container holiday-container">
+
+  <h1 style="color: white; text-align: center;">{{name}}</h1>
+
+  <div class="content">
     {% for i in data %}
-    {% if i['name'] == name %}
-    {{name}}
-    <br>
-    <img class="thumbnail" src= "{{ holidayGif }}" alt="GIF unable to Load">
-    <br>
-    {{i['date']}}
-    <br>
-    {{i['description']}}
-    <br>
-    {{i['type']}}
-    {% endif %}
+      {% if i['name'] == name %}
+        <img class="thumbnail" src="{{ holidayGif }}" alt="GIF unable to Load" style="display: block; margin: 0 auto;">
+        <p><strong>Date:</strong> {{i['date']}}</p>
+        <p><strong>Description:</strong> {{i['description']}}</p>
+        <p><strong>Type:</strong> {{i['type'][0]}}</p>
+      {% endif %}
     {% endfor %}
-    <br>
-    <form action="{{ url_for('holidayRedirect') }}" method="get" target="_blank" style="display:inline;" style = "color:white">
-        <input type="hidden" name="query" value="{{ name }} holiday food recipes" style = "color:white">
-        <button type="submit" style = "color:white">Click Here To View</button>
+  </div>
+
+  <div class="text-center">
+    <form action="{{ url_for('holidayRedirect') }}" method="get" target="_blank" style="display:inline;">
+      <input type="hidden" name="query" value="{{ name }} holiday food recipes">
+      <button type="submit" class="button primary">Click Here To View Related Recipe</button>
     </form>
+    <p>50% chance, greater depending on holiday type</p>
+  </div>
 </div>
 </body>
 </html>

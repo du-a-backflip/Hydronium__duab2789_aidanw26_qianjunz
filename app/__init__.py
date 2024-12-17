@@ -110,6 +110,9 @@ def search(queryS):
         if query:
             return redirect(url_for('search', queryS=query, minCarbs=minCarbs, maxCarbs=maxCarbs, minProtein=minProtein, maxProtein=maxProtein, minCalories=minCalories, maxCalories=maxCalories, minFat=minFat, maxFat=maxFat))
 
+    if 'username' in session:
+        return render_template("search.html", recipes=foodList, query=queryS, logged_in=True, username=session['username'])
+
     return render_template("search.html", recipes=foodList, query=queryS)
 
 @app.route('/search/<queryS>/<recipeID>', methods = ['GET', 'POST'])
@@ -126,7 +129,8 @@ def view(queryS, recipeID):
     if recipeGif == 405:
         return render_template("view.html",  errorMSG="INVALID API NAME")
 
-
+    if 'username' in session:
+        return render_template("view.html", recipeInformation=recipeInformation, recipeGif=recipeGif['link'], logged_in=True, username=session['username'])
     return render_template("view.html", recipeInformation=recipeInformation, recipeGif=recipeGif['link'])
 
 @app.route('/calData/<name>', methods = ['GET', 'POST'])

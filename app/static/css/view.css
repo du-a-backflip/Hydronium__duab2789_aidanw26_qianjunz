@@ -2,7 +2,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #202124; 
-    color: #ffffff; 
 }
 
 .top-bar {
@@ -102,5 +101,22 @@ input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on c
 }
 
 .recipe-container {
-    margin: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #2c2f33;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+h2, h5{
+    color: #FCD12A
+}
+
+
+li strong {
+    color: #F6BE00;
 }

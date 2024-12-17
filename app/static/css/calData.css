@@ -90,3 +90,52 @@ input[type="checkbox"]:checked + label + .dropdown-menu { /* Show dropdown on cl
 input[type="checkbox"]:checked + label + .dropdown-menu2 { /* Show dropdown on click*/
     display: block;
 }
+
+.holiday-container {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #2c2f33;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: left;
+  }
+  
+  h1 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+  }
+  
+  .thumbnail {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  p {
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: white;
+  }
+  
+  p strong {
+    color: #ffcc00;
+  }
+  
+  .button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #202124;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #ffaa00;
+  }
