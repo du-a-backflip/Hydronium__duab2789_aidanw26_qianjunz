@@ -129,18 +129,6 @@ def view(queryS, recipeID):
 
     return render_template("view.html", recipeInformation=recipeInformation, recipeGif=recipeGif['link'])
 
-@app.route('/create', methods = ['GET', 'POST'])
-def create():
-    if 'username' in session:
-        return render_template("create.html")
-    return redirect(url_for('dashboard'))
-
-@app.route('/edit', methods = ['GET', 'POST'])
-def edit():
-    if 'username' in session:
-        return render_template("edit.html")
-    return redirect(url_for('dashboard'))
-
 @app.route('/calData/<name>', methods = ['GET', 'POST'])
 def calDataName(name):
     data = APIModules.getHolidays("2024")
@@ -207,10 +195,6 @@ def calendar():
         return render_template("calendar.html", holidays=actualDates, logged_in=True, username = session['username'])
 
     return render_template("calendar.html", holidays=actualDates, logged_in=False)
-
-@app.route('/hrecipes', methods = ['GET', 'POST'])
-def hrecipes():
-    return render_template("hrecipes.html")
 
 @app.route('/settings', methods = ['GET', 'POST'])
 def settings():
